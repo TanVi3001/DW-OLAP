@@ -1,0 +1,46 @@
+﻿WITH
+MEMBER [Measures].[US Junction] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[JUNCTION].&[True])
+MEMBER [Measures].[CA Junction] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[JUNCTION].&[True])
+MEMBER [Measures].[US Roundabout] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+MEMBER [Measures].[CA Roundabout] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+MEMBER [Measures].[US Railway] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+MEMBER [Measures].[CA Railway] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+MEMBER [Measures].[US Traffic Signal] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+MEMBER [Measures].[CA Traffic Signal] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+
+SELECT
+{
+    [Measures].[US Junction],
+    [Measures].[CA Junction],
+    [Measures].[US Roundabout],
+    [Measures].[CA Roundabout],
+    [Measures].[US Railway],
+    [Measures].[CA Railway],
+    [Measures].[US Traffic Signal],
+    [Measures].[CA Traffic Signal]
+} ON COLUMNS,
+NONEMPTY(
+    [ID START DATE].[YEAR].Levels(1).Members,
+    [Measures].[FACT ACCIDENT Count]
+) ON ROWS
+FROM [US Accidents DW];

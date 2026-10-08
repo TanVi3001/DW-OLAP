@@ -4,9 +4,9 @@ Dự án kho dữ liệu và phân tích OLAP cho dữ liệu US Accidents, sử
 
 ## Mở nhanh
 
-- **Pivot Excel:** [Câu b](Pivot_Excel/Pivot_b.xlsx) · [Câu e](Pivot_Excel/Pivot_e.xlsx) · [Cách mở và lưu workbook](Pivot_Excel/README.md)
+- **Pivot Excel:** [Câu a (tạo theo hướng dẫn)](Tai_lieu/Huong_dan_bao_cao_cau_a.md) · [Câu b](Pivot_Excel/Pivot_b.xlsx) · [Câu e](Pivot_Excel/Pivot_e.xlsx) · [Cách mở và lưu workbook](Pivot_Excel/README.md)
 - **Đề bài:** [Ngữ cảnh và 15 câu hỏi nghiệp vụ](Tai_lieu/ngu_canh_va_bo_cau_hoi_nghiep_vu.md)
-- **Hướng dẫn:** [Manual và Pivot câu b, e, f](Tai_lieu/Huong_dan_manual_b_e_f.md) · [Câu f: Top 5 đường ở California](Tai_lieu/Huong_dan_cau_f_Top5.md)
+- **Hướng dẫn:** [Câu a: Cube Browser, Pivot Excel, MDX và cách chụp ảnh báo cáo](Tai_lieu/Huong_dan_bao_cao_cau_a.md) · [Manual và Pivot câu b, e, f](Tai_lieu/Huong_dan_manual_b_e_f.md) · [Câu f: Top 5 đường ở California](Tai_lieu/Huong_dan_cau_f_Top5.md)
 - **Báo cáo:** [Báo cáo SSIS](Tai_lieu/Bao_cao/24520814_24521985_SSIS.docx) · [Kế hoạch triển khai](Tai_lieu/Bao_cao/Plan_trien_khai_Chuong_5_US_Accidents.docx)
 
 ## Cấu trúc thư mục
@@ -28,6 +28,7 @@ DW-OLAP/
 |---|---|
 | `SSIS/` | Solution và package ETL |
 | `SSAS/SSAS/` | Project SSAS, data source, DSV, dimensions và cube |
+| `SSAS/MDX_a/` | Truy vấn MDX câu a, so sánh toàn quốc và California theo năm |
 | `SSAS/MDX_b_e_f/` | Truy vấn MDX b, e, f đã chạy kiểm chứng trên cube |
 | `SSAS/backups/` | Bản sao cấu hình và kết quả kiểm chứng |
 | `archive/Accidents_500.csv` | Dữ liệu mẫu 500.000 dòng |
