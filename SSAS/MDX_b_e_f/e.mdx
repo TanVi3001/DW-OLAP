@@ -1,0 +1,51 @@
+-- e: month, quarter and year in one result, split by Day/Night and weekend.
+WITH
+SET [CacKy] AS
+    HIERARCHIZE(
+        UNION(
+            UNION(
+                [ID START DATE].[Hierarchy].[YEAR].MEMBERS,
+                [ID START DATE].[Hierarchy].[QUARTER].MEMBERS
+            ),
+            [ID START DATE].[Hierarchy].[MONTH].MEMBERS
+        )
+    )
+MEMBER [Measures].[Cap tong hop] AS
+    [ID START DATE].[Hierarchy].CURRENTMEMBER.LEVEL.NAME
+MEMBER [Measures].[Ky] AS
+    CASE [ID START DATE].[Hierarchy].CURRENTMEMBER.LEVEL.NAME
+        WHEN 'YEAR' THEN
+            [ID START DATE].[Hierarchy].CURRENTMEMBER.NAME
+        WHEN 'QUARTER' THEN
+            ANCESTOR([ID START DATE].[Hierarchy].CURRENTMEMBER,
+                     [ID START DATE].[Hierarchy].[YEAR]).NAME
+            + ' / Q' + [ID START DATE].[Hierarchy].CURRENTMEMBER.NAME
+        WHEN 'MONTH' THEN
+            ANCESTOR([ID START DATE].[Hierarchy].CURRENTMEMBER,
+                     [ID START DATE].[Hierarchy].[YEAR]).NAME
+            + ' / Q' + ANCESTOR([ID START DATE].[Hierarchy].CURRENTMEMBER,
+                               [ID START DATE].[Hierarchy].[QUARTER]).NAME
+            + ' / T' + [ID START DATE].[Hierarchy].CURRENTMEMBER.NAME
+    END
+MEMBER [Measures].[Ngay thuong - Day] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [ID START DATE].[IS WEEKEND].&[False],
+     [FACT ACCIDENT].[SUNRISE SUNSET].&[Day])
+MEMBER [Measures].[Ngay thuong - Night] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [ID START DATE].[IS WEEKEND].&[False],
+     [FACT ACCIDENT].[SUNRISE SUNSET].&[Night])
+MEMBER [Measures].[Cuoi tuan - Day] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [ID START DATE].[IS WEEKEND].&[True],
+     [FACT ACCIDENT].[SUNRISE SUNSET].&[Day])
+MEMBER [Measures].[Cuoi tuan - Night] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [ID START DATE].[IS WEEKEND].&[True],
+     [FACT ACCIDENT].[SUNRISE SUNSET].&[Night])
+SELECT
+    {[Measures].[Cap tong hop], [Measures].[Ky],
+     [Measures].[Ngay thuong - Day], [Measures].[Ngay thuong - Night],
+     [Measures].[Cuoi tuan - Day], [Measures].[Cuoi tuan - Night]} ON COLUMNS,
+    NONEMPTY([CacKy], [Measures].[FACT ACCIDENT Count]) ON ROWS
+FROM [US Accidents DW];

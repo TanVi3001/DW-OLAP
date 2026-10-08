@@ -1,0 +1,28 @@
+-- f1: nighttime accidents with traffic signals, by State.
+WITH
+MEMBER [Measures].[So vu muc 3-4] AS
+    SUM(
+        {[DIM SEVERITY].[ID SEVERITY].&[3],
+         [DIM SEVERITY].[ID SEVERITY].&[4]},
+        [Measures].[FACT ACCIDENT Count]
+    )
+MEMBER [Measures].[Ty le muc 3-4] AS
+    IIF(
+        [Measures].[FACT ACCIDENT Count] = 0,
+        NULL,
+        [Measures].[So vu muc 3-4] / [Measures].[FACT ACCIDENT Count]
+    ), FORMAT_STRING = '0.00%'
+SELECT
+    {[Measures].[FACT ACCIDENT Count],
+     [Measures].[So vu muc 3-4],
+     [Measures].[Ty le muc 3-4]} ON COLUMNS,
+    ORDER(
+        NONEMPTY([DIM LOCATION].[STATE].[STATE].MEMBERS,
+                 [Measures].[FACT ACCIDENT Count]),
+        [Measures].[FACT ACCIDENT Count], BDESC
+    ) ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True],
+    [FACT ACCIDENT].[SUNRISE SUNSET].&[Night]
+);

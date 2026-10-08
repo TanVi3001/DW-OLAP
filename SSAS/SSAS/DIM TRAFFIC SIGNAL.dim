@@ -1,0 +1,176 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="eddfed64-060b-46f1-8bfa-d772f4622fdf" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DIM TRAFFIC SIGNAL</ID>
+  <Name>DIM TRAFFIC SIGNAL</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="d7eb45b9-0f0c-48cb-b2c9-449fbec79529">
+    <DataSourceViewID>US Accidents DW</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="ecf3ea8d-1d2d-4b52-b252-fb4d1e7e37eb">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="3c47f632-310c-43e2-858c-17d432b46ed2">
+      <ID>ID TRAFFIC SIGNAL</ID>
+      <Name>ID TRAFFIC SIGNAL</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="d594f903-49ac-44e9-b8ac-2e831391809f">
+          <DataType>Integer</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="e81699a4-23bc-4c72-a207-24acdb797d21">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>ID_TRAFFIC_SIGNAL</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="c7901f3d-aa7e-477f-8dce-60d54de047fc">
+          <AttributeID>CROSSING</AttributeID>
+          <Name>CROSSING</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1c43040d-354d-4209-8fc5-1bddd8463e6c">
+          <AttributeID>GIVE WAY</AttributeID>
+          <Name>GIVE WAY</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="b5eaee79-3eba-48c7-a887-58903652e4f6">
+          <AttributeID>STOP SIGN</AttributeID>
+          <Name>STOP SIGN</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="2ac83dec-e592-4c5e-9548-e3a043a4e348">
+          <AttributeID>TRAFFIC CALMING</AttributeID>
+          <Name>TRAFFIC CALMING</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="446a33b1-e65e-413a-84a0-d5bbf092ea1a">
+          <AttributeID>TRAFFIC SIGNAL</AttributeID>
+          <Name>TRAFFIC SIGNAL</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="7b5eedcf-b056-423c-94a9-b1766b5983f8">
+      <ID>CROSSING</ID>
+      <Name>CROSSING</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="be0370a0-c5c9-4dbd-86ca-1864af500e14">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f74a4029-e775-4985-97b9-632a327502bc">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>CROSSING</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2bdf348d-90db-4a5c-a20d-fd1f57988128">
+      <ID>GIVE WAY</ID>
+      <Name>GIVE WAY</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f50ce711-76c9-44e9-8786-e63e2f2d6c9c">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="df0bd308-92b6-4c74-a9e4-5cdbc7b5ba89">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>GIVE_WAY</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="e9d05e8c-bb62-4ff7-819b-ece07c1300d1">
+      <ID>STOP SIGN</ID>
+      <Name>STOP SIGN</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="bb72fe6b-37b8-4d85-9cc1-48ec287784b9">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1c26c861-de60-4fb3-bffa-0c5e77e585c3">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>STOP_SIGN</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="69d7212b-1c63-4fb5-9a6b-29d5febefc12">
+      <ID>TRAFFIC CALMING</ID>
+      <Name>TRAFFIC CALMING</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a657a02c-d20e-4c3d-873f-13c35ebe6ccd">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="8e871b72-202a-4cb9-8001-17cce73f7069">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>TRAFFIC_CALMING</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="422a03b1-1da8-480a-95d6-8edffcc1b006">
+      <ID>TRAFFIC SIGNAL</ID>
+      <Name>TRAFFIC SIGNAL</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="dde5d004-5793-4a6f-b9e1-ed86bb65f1b2">
+          <DataType>Boolean</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="81b9e6f1-8ac9-467b-939b-d87f86e32d95">
+            <TableID>dbo_DIM_TRAFFIC_SIGNAL</TableID>
+            <ColumnID>TRAFFIC_SIGNAL</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

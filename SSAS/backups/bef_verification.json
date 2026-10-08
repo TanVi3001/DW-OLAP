@@ -1,0 +1,190 @@
+﻿{
+    "b":  [
+              {
+                  "[DIM LOCATION].[CITY].[CITY].[MEMBER_CAPTION]":  "Pittsburgh",
+                  "[DIM LOCATION].[CITY].[CITY].[Key]":  "Pittsburgh",
+                  "[Measures].[FACT ACCIDENT Count]":  8
+              },
+              {
+                  "[DIM LOCATION].[CITY].[CITY].[MEMBER_CAPTION]":  "Birmingham",
+                  "[DIM LOCATION].[CITY].[CITY].[Key]":  "Birmingham",
+                  "[Measures].[FACT ACCIDENT Count]":  5
+              },
+              {
+                  "[DIM LOCATION].[CITY].[CITY].[MEMBER_CAPTION]":  "Decatur",
+                  "[DIM LOCATION].[CITY].[CITY].[Key]":  "Decatur",
+                  "[Measures].[FACT ACCIDENT Count]":  4
+              },
+              {
+                  "[DIM LOCATION].[CITY].[CITY].[MEMBER_CAPTION]":  "Columbia",
+                  "[DIM LOCATION].[CITY].[CITY].[Key]":  "Columbia",
+                  "[Measures].[FACT ACCIDENT Count]":  4
+              },
+              {
+                  "[DIM LOCATION].[CITY].[CITY].[MEMBER_CAPTION]":  "Houston",
+                  "[DIM LOCATION].[CITY].[CITY].[Key]":  "Houston",
+                  "[Measures].[FACT ACCIDENT Count]":  4
+              }
+          ],
+    "quarters_2021_severity4":  [
+                                    {
+                                        "[ID START DATE].[QUARTER].[QUARTER].[MEMBER_CAPTION]":  "1",
+                                        "[ID START DATE].[QUARTER].[QUARTER].[Key]":  "1",
+                                        "[Measures].[FACT ACCIDENT Count]":  468
+                                    },
+                                    {
+                                        "[ID START DATE].[QUARTER].[QUARTER].[MEMBER_CAPTION]":  "2",
+                                        "[ID START DATE].[QUARTER].[QUARTER].[Key]":  "2",
+                                        "[Measures].[FACT ACCIDENT Count]":  469
+                                    },
+                                    {
+                                        "[ID START DATE].[QUARTER].[QUARTER].[MEMBER_CAPTION]":  "3",
+                                        "[ID START DATE].[QUARTER].[QUARTER].[Key]":  "3",
+                                        "[Measures].[FACT ACCIDENT Count]":  443
+                                    },
+                                    {
+                                        "[ID START DATE].[QUARTER].[QUARTER].[MEMBER_CAPTION]":  "4",
+                                        "[ID START DATE].[QUARTER].[QUARTER].[Key]":  "4",
+                                        "[Measures].[FACT ACCIDENT Count]":  559
+                                    }
+                                ],
+    "day_night_2021":  [
+                           {
+                               "[ID START DATE].[IS WEEKEND].[IS WEEKEND].[MEMBER_CAPTION]":  "False",
+                               "[FACT ACCIDENT].[SUNRISE SUNSET].[SUNRISE SUNSET].[MEMBER_CAPTION]":  "Day",
+                               "[Measures].[FACT ACCIDENT Count]":  51601
+                           },
+                           {
+                               "[ID START DATE].[IS WEEKEND].[IS WEEKEND].[MEMBER_CAPTION]":  "False",
+                               "[FACT ACCIDENT].[SUNRISE SUNSET].[SUNRISE SUNSET].[MEMBER_CAPTION]":  "Night",
+                               "[Measures].[FACT ACCIDENT Count]":  26008
+                           },
+                           {
+                               "[ID START DATE].[IS WEEKEND].[IS WEEKEND].[MEMBER_CAPTION]":  "True",
+                               "[FACT ACCIDENT].[SUNRISE SUNSET].[SUNRISE SUNSET].[MEMBER_CAPTION]":  "Day",
+                               "[Measures].[FACT ACCIDENT Count]":  15227
+                           },
+                           {
+                               "[ID START DATE].[IS WEEKEND].[IS WEEKEND].[MEMBER_CAPTION]":  "True",
+                               "[FACT ACCIDENT].[SUNRISE SUNSET].[SUNRISE SUNSET].[MEMBER_CAPTION]":  "Night",
+                               "[Measures].[FACT ACCIDENT Count]":  8519
+                           }
+                       ],
+    "traffic_signal_members":  [
+                                   {
+                                       "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[MEMBER_CAPTION]":  "False",
+                                       "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[MEMBER_UNIQUE_NAME]":  "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].\u0026[False]",
+                                       "[Measures].[FACT ACCIDENT Count]":  425965
+                                   },
+                                   {
+                                       "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[MEMBER_CAPTION]":  "True",
+                                       "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[TRAFFIC SIGNAL].[MEMBER_UNIQUE_NAME]":  "[DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].\u0026[True]",
+                                       "[Measures].[FACT ACCIDENT Count]":  74035
+                                   }
+                               ],
+    "f_top_state":  [
+                        {
+                            "[DIM LOCATION].[STATE].[STATE].[MEMBER_CAPTION]":  "CA",
+                            "[Measures].[FACT ACCIDENT Count]":  3046,
+                            "[Measures].[Severity34]":  258
+                        }
+                    ],
+    "hour_members":  [
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "0",
+                             "[Measures].[FACT ACCIDENT Count]":  7374
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "1",
+                             "[Measures].[FACT ACCIDENT Count]":  6265
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "2",
+                             "[Measures].[FACT ACCIDENT Count]":  6151
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "3",
+                             "[Measures].[FACT ACCIDENT Count]":  5425
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "4",
+                             "[Measures].[FACT ACCIDENT Count]":  10380
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "5",
+                             "[Measures].[FACT ACCIDENT Count]":  14754
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "6",
+                             "[Measures].[FACT ACCIDENT Count]":  26094
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "7",
+                             "[Measures].[FACT ACCIDENT Count]":  37988
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "8",
+                             "[Measures].[FACT ACCIDENT Count]":  37626
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "9",
+                             "[Measures].[FACT ACCIDENT Count]":  23523
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "10",
+                             "[Measures].[FACT ACCIDENT Count]":  22523
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "11",
+                             "[Measures].[FACT ACCIDENT Count]":  22765
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "12",
+                             "[Measures].[FACT ACCIDENT Count]":  22965
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "13",
+                             "[Measures].[FACT ACCIDENT Count]":  25400
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "14",
+                             "[Measures].[FACT ACCIDENT Count]":  28959
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "15",
+                             "[Measures].[FACT ACCIDENT Count]":  34126
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "16",
+                             "[Measures].[FACT ACCIDENT Count]":  37424
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "17",
+                             "[Measures].[FACT ACCIDENT Count]":  37099
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "18",
+                             "[Measures].[FACT ACCIDENT Count]":  27929
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "19",
+                             "[Measures].[FACT ACCIDENT Count]":  19115
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "20",
+                             "[Measures].[FACT ACCIDENT Count]":  14529
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "21",
+                             "[Measures].[FACT ACCIDENT Count]":  12421
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "22",
+                             "[Measures].[FACT ACCIDENT Count]":  10998
+                         },
+                         {
+                             "[ID START TIME].[HOUR].[HOUR].[MEMBER_CAPTION]":  "23",
+                             "[Measures].[FACT ACCIDENT Count]":  8167
+                         }
+                     ]
+}

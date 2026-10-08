@@ -1,0 +1,47 @@
+-- f2: automatically select the highest-count State, then streets > 50.
+-- Keep Night and Traffic Signal filters throughout the drill-down.
+WITH
+SET [BangCaoNhat] AS
+    TOPCOUNT(
+        NONEMPTY([DIM LOCATION].[STATE].[STATE].MEMBERS,
+                 [Measures].[FACT ACCIDENT Count]),
+        1, [Measures].[FACT ACCIDENT Count]
+    )
+SET [DuongTren50Vu] AS
+    FILTER(
+        NONEMPTY(
+            [BangCaoNhat]
+            * [DIM LOCATION].[CITY].[CITY].MEMBERS
+            * [DIM LOCATION].[STREET].[STREET].MEMBERS,
+            [Measures].[FACT ACCIDENT Count]
+        ),
+        [Measures].[FACT ACCIDENT Count] > 50
+    )
+MEMBER [Measures].[So vu tai gio cao diem] AS
+    MAX([ID START TIME].[HOUR].[HOUR].MEMBERS,
+        [Measures].[FACT ACCIDENT Count])
+MEMBER [Measures].[Gio cao diem] AS
+    GENERATE(
+        FILTER(
+            NONEMPTY([ID START TIME].[HOUR].[HOUR].MEMBERS,
+                     [Measures].[FACT ACCIDENT Count]),
+            [Measures].[FACT ACCIDENT Count]
+            = MAX([ID START TIME].[HOUR].[HOUR].MEMBERS,
+                  [Measures].[FACT ACCIDENT Count])
+        ),
+        FORMAT(VAL([ID START TIME].[HOUR].CURRENTMEMBER.NAME), '00')
+        + ':00 - '
+        + FORMAT(VAL([ID START TIME].[HOUR].CURRENTMEMBER.NAME), '00')
+        + ':59',
+        ', '
+    )
+SELECT
+    {[Measures].[FACT ACCIDENT Count],
+     [Measures].[Gio cao diem],
+     [Measures].[So vu tai gio cao diem]} ON COLUMNS,
+    ORDER([DuongTren50Vu], [Measures].[FACT ACCIDENT Count], BDESC) ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True],
+    [FACT ACCIDENT].[SUNRISE SUNSET].&[Night]
+);

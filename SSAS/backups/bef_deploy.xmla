@@ -1,0 +1,1789 @@
+<Batch xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" Transaction="true">
+  <Alter AllowCreate="false" ObjectExpansion="ExpandFull">
+    <Object>
+      <DatabaseID>SSAS</DatabaseID>
+      <DimensionID>DIM TIME</DimensionID>
+    </Object>
+    <ObjectDefinition>
+      <Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" dwd:design-time-name="45eca5ab-7f7e-43bd-9f11-707b5ed3af1f">
+        <ID>DIM TIME</ID>
+        <Name>DIM TIME</Name>
+        <Annotations>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+            <Value>
+              <dds xmlns="">
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3115" scrolltop="-5041" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="9270" y="14166" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="010000009001f13e0100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_TIME" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="3116" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b00002c0c0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_TIME" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+              </dds>
+            </Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+            <Value>false</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+            <Value>-3115</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+            <Value>-5041</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+            <Value>20</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+            <Value>100</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+            <Value>
+              <DiagramLayout xmlns="" ZoomPercent="100" ViewPortX="0" ViewPortY="0">
+                <Shapes NodeWidth="105">
+                  <Shape Id="ID TIME" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="ID TIME" />
+                      <Attribute Id="FULL TIME" />
+                    </Attributes>
+                    <Position x="20" y="20" />
+                  </Shape>
+                  <Shape Id="HOUR" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="HOUR" />
+                    </Attributes>
+                    <Position x="156" y="20" />
+                  </Shape>
+                  <Shape Id="MINUTE" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="MINUTE" />
+                    </Attributes>
+                    <Position x="292" y="20" />
+                  </Shape>
+                  <Shape Id="SECOND" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="SECOND" />
+                    </Attributes>
+                    <Position x="428" y="20" />
+                  </Shape>
+                </Shapes>
+              </DiagramLayout>
+            </Value>
+          </Annotation>
+        </Annotations>
+        <Source xsi:type="DataSourceViewBinding">
+          <DataSourceViewID>US Accidents DW</DataSourceViewID>
+        </Source>
+        <ErrorConfiguration>
+          <KeyNotFound>ReportAndStop</KeyNotFound>
+          <KeyDuplicate>ReportAndStop</KeyDuplicate>
+          <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+        </ErrorConfiguration>
+        <Attributes>
+          <Attribute>
+            <ID>ID TIME</ID>
+            <Name>ID TIME</Name>
+            <Usage>Key</Usage>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>ID_TIME</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>FULL TIME</AttributeID>
+                <Name>FULL TIME</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>SECOND</AttributeID>
+                <Name>SECOND</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>FULL TIME</ID>
+            <Name>FULL TIME</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>8</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>FULL_TIME</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>HOUR</ID>
+            <Name>HOUR</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>HOUR</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_TIME</TableID>
+                <ColumnID>HOUR</ColumnID>
+              </Source>
+            </NameColumn>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>MINUTE</ID>
+            <Name>MINUTE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>HOUR</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>MINUTE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_TIME</TableID>
+                <ColumnID>MINUTE</ColumnID>
+              </Source>
+            </NameColumn>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>HOUR</AttributeID>
+                <Name>HOUR</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>SECOND</ID>
+            <Name>SECOND</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>HOUR</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>MINUTE</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_TIME</TableID>
+                  <ColumnID>SECOND</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_TIME</TableID>
+                <ColumnID>SECOND</ColumnID>
+              </Source>
+            </NameColumn>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>MINUTE</AttributeID>
+                <Name>MINUTE</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+        </Attributes>
+        <Hierarchies>
+          <Hierarchy>
+            <ID>Hierarchy</ID>
+            <Name>Hierarchy</Name>
+            <Levels>
+              <Level>
+                <ID>HOUR</ID>
+                <Name>HOUR</Name>
+                <SourceAttributeID>HOUR</SourceAttributeID>
+              </Level>
+              <Level>
+                <ID>MINUTE</ID>
+                <Name>MINUTE</Name>
+                <SourceAttributeID>MINUTE</SourceAttributeID>
+              </Level>
+              <Level>
+                <ID>SECOND</ID>
+                <Name>SECOND</Name>
+                <SourceAttributeID>SECOND</SourceAttributeID>
+              </Level>
+            </Levels>
+          </Hierarchy>
+        </Hierarchies>
+      </Dimension>
+    </ObjectDefinition>
+  </Alter>
+  <Alter AllowCreate="false" ObjectExpansion="ExpandFull">
+    <Object>
+      <DatabaseID>SSAS</DatabaseID>
+      <DimensionID>DIM LOCATION</DimensionID>
+    </Object>
+    <ObjectDefinition>
+      <Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" dwd:design-time-name="a1a240a3-1dbe-484f-9c0d-0729507702b9">
+        <ID>DIM LOCATION</ID>
+        <Name>DIM LOCATION</Name>
+        <Annotations>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+            <Value>
+              <dds xmlns="">
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="2" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-3083" scrolltop="-4832" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="9270" y="14166" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="010000009001f13e0100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_LOCATION" left="20" top="0" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="3064" height="3535" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000f80b0000cf0d0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_LOCATION" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+              </dds>
+            </Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+            <Value>false</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+            <Value>-3083</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+            <Value>-4832</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+            <Value>20</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+            <Value>100</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+            <Value>
+              <DiagramLayout xmlns="" ZoomPercent="100" ViewPortX="0" ViewPortY="0">
+                <Shapes NodeWidth="127">
+                  <Shape Id="ID LOCATION" Expanded="true">
+                    <Attributes>
+                      <Attribute Id="ID LOCATION" />
+                      <Attribute Id="TIMEZONE" />
+                    </Attributes>
+                    <Position x="20" y="20" />
+                  </Shape>
+                  <Shape Id="STATE" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="STATE" />
+                    </Attributes>
+                    <Position x="183" y="20" />
+                  </Shape>
+                  <Shape Id="COUNTY" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="COUNTY" />
+                    </Attributes>
+                    <Position x="347" y="20" />
+                  </Shape>
+                  <Shape Id="CITY" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="CITY" />
+                    </Attributes>
+                    <Position x="511" y="20" />
+                  </Shape>
+                  <Shape Id="STREET" Expanded="false">
+                    <Attributes>
+                      <Attribute Id="STREET" />
+                    </Attributes>
+                    <Position x="675" y="20" />
+                  </Shape>
+                </Shapes>
+              </DiagramLayout>
+            </Value>
+          </Annotation>
+        </Annotations>
+        <Source xsi:type="DataSourceViewBinding">
+          <DataSourceViewID>US Accidents DW</DataSourceViewID>
+        </Source>
+        <ErrorConfiguration>
+          <KeyNotFound>ReportAndStop</KeyNotFound>
+          <KeyDuplicate>ReportAndStop</KeyDuplicate>
+          <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+        </ErrorConfiguration>
+        <Attributes>
+          <Attribute>
+            <ID>ID LOCATION</ID>
+            <Name>ID LOCATION</Name>
+            <Usage>Key</Usage>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>ID_LOCATION</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>STREET</AttributeID>
+                <Name>STREET</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>COUNTY</AttributeID>
+                <Name>COUNTY</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>TIMEZONE</AttributeID>
+                <Name>TIMEZONE</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>STREET</ID>
+            <Name>STREET</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>10</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>STATE</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>100</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>CITY</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>255</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>STREET</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <DataSize>255</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_LOCATION</TableID>
+                <ColumnID>STREET</ColumnID>
+              </Source>
+            </NameColumn>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>CITY</AttributeID>
+                <Name>CITY</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>CITY</ID>
+            <Name>CITY</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>10</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>STATE</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>100</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>CITY</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <DataSize>100</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_LOCATION</TableID>
+                <ColumnID>CITY</ColumnID>
+              </Source>
+            </NameColumn>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>STATE</AttributeID>
+                <Name>STATE</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>COUNTY</ID>
+            <Name>COUNTY</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>10</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>STATE</ColumnID>
+                </Source>
+              </KeyColumn>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>100</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>COUNTY</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <DataSize>100</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_LOCATION</TableID>
+                <ColumnID>COUNTY</ColumnID>
+              </Source>
+            </NameColumn>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>STATE</AttributeID>
+                <Name>STATE</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>STATE</ID>
+            <Name>STATE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>10</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>STATE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <NameColumn>
+              <DataType>WChar</DataType>
+              <DataSize>10</DataSize>
+              <Source xsi:type="ColumnBinding">
+                <TableID>dbo_DIM_LOCATION</TableID>
+                <ColumnID>STATE</ColumnID>
+              </Source>
+            </NameColumn>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>TIMEZONE</ID>
+            <Name>TIMEZONE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>50</DataSize>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_DIM_LOCATION</TableID>
+                  <ColumnID>TIMEZONE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+        </Attributes>
+        <Hierarchies>
+          <Hierarchy>
+            <ID>Hierarchy</ID>
+            <Name>Location_BEF</Name>
+            <Levels>
+              <Level>
+                <ID>STATE</ID>
+                <Name>STATE</Name>
+                <SourceAttributeID>STATE</SourceAttributeID>
+              </Level>
+              <Level>
+                <ID>CITY</ID>
+                <Name>CITY</Name>
+                <SourceAttributeID>CITY</SourceAttributeID>
+              </Level>
+              <Level>
+                <ID>STREET</ID>
+                <Name>STREET</Name>
+                <SourceAttributeID>STREET</SourceAttributeID>
+              </Level>
+            </Levels>
+          </Hierarchy>
+        </Hierarchies>
+      </Dimension>
+    </ObjectDefinition>
+  </Alter>
+  <Alter AllowCreate="false" ObjectExpansion="ExpandFull">
+    <Object>
+      <DatabaseID>SSAS</DatabaseID>
+      <DimensionID>FACT ACCIDENT</DimensionID>
+    </Object>
+    <ObjectDefinition>
+      <Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine" dwd:design-time-name="9fb996b7-975e-4f61-ae97-4a2b0f70715d">
+        <ID>FACT ACCIDENT</ID>
+        <Name>FACT ACCIDENT</Name>
+        <Annotations>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+            <Value>false</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+            <Value>100</Value>
+          </Annotation>
+        </Annotations>
+        <Source xsi:type="DataSourceViewBinding">
+          <DataSourceViewID>US Accidents DW</DataSourceViewID>
+        </Source>
+        <ErrorConfiguration>
+          <KeyNotFound>ReportAndStop</KeyNotFound>
+          <KeyDuplicate>ReportAndStop</KeyDuplicate>
+          <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+        </ErrorConfiguration>
+        <Attributes>
+          <Attribute>
+            <ID>ID FACT</ID>
+            <Name>ID FACT</Name>
+            <Usage>Key</Usage>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_FACT</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <AttributeRelationships>
+              <AttributeRelationship>
+                <AttributeID>ID SEVERITY</AttributeID>
+                <Name>ID SEVERITY</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID END DATE</AttributeID>
+                <Name>ID END DATE</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID LOCATION</AttributeID>
+                <Name>ID LOCATION</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID END TIME</AttributeID>
+                <Name>ID END TIME</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID ROAD STRUCTURE</AttributeID>
+                <Name>ID ROAD STRUCTURE</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID TRAFFIC SIGNAL</AttributeID>
+                <Name>ID TRAFFIC SIGNAL</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID START TIME</AttributeID>
+                <Name>ID START TIME</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID START DATE</AttributeID>
+                <Name>ID START DATE</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>ID WEATHER</AttributeID>
+                <Name>ID WEATHER</Name>
+              </AttributeRelationship>
+              <AttributeRelationship>
+                <AttributeID>SUNRISE SUNSET</AttributeID>
+                <Name>SUNRISE SUNSET</Name>
+              </AttributeRelationship>
+            </AttributeRelationships>
+            <OrderBy>Key</OrderBy>
+          </Attribute>
+          <Attribute>
+            <ID>ID SEVERITY</ID>
+            <Name>ID SEVERITY</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_SEVERITY</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID END DATE</ID>
+            <Name>ID END DATE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_END_DATE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID LOCATION</ID>
+            <Name>ID LOCATION</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_LOCATION</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID END TIME</ID>
+            <Name>ID END TIME</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_END_TIME</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID ROAD STRUCTURE</ID>
+            <Name>ID ROAD STRUCTURE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_ROAD_STRUCTURE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID TRAFFIC SIGNAL</ID>
+            <Name>ID TRAFFIC SIGNAL</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_TRAFFIC_SIGNAL</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID START TIME</ID>
+            <Name>ID START TIME</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_START_TIME</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID START DATE</ID>
+            <Name>ID START DATE</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_START_DATE</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>ID WEATHER</ID>
+            <Name>ID WEATHER</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>Integer</DataType>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>ID_WEATHER</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+          </Attribute>
+          <Attribute>
+            <ID>SUNRISE SUNSET</ID>
+            <Name>SUNRISE SUNSET</Name>
+            <KeyColumns>
+              <KeyColumn>
+                <DataType>WChar</DataType>
+                <DataSize>10</DataSize>
+                <NullProcessing>ZeroOrBlank</NullProcessing>
+                <Source xsi:type="ColumnBinding">
+                  <TableID>dbo_FACT_ACCIDENT</TableID>
+                  <ColumnID>SUNRISE_SUNSET</ColumnID>
+                </Source>
+              </KeyColumn>
+            </KeyColumns>
+            <OrderBy>Key</OrderBy>
+            <AttributeHierarchyVisible>true</AttributeHierarchyVisible>
+          </Attribute>
+        </Attributes>
+      </Dimension>
+    </ObjectDefinition>
+  </Alter>
+  <Alter AllowCreate="false" ObjectExpansion="ExpandFull">
+    <Object>
+      <DatabaseID>SSAS</DatabaseID>
+      <CubeID>US Accidents DW</CubeID>
+    </Object>
+    <ObjectDefinition>
+      <Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+        <ID>US Accidents DW</ID>
+        <Name>US Accidents DW</Name>
+        <Annotations>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+            <Value>
+              <dds xmlns="">
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="18" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-8617" scrolltop="-2022" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="75" x="25898" y="14166" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="010000009001f13e0100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="FACT_ACCIDENT" left="5929" top="8798" logicalid="1" controlid="1" masterid="0" hint1="0" hint2="0" width="4373" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00001511000088130000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_FACT_ACCIDENT" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_WEATHER" left="3197" top="18223" logicalid="2" controlid="2" masterid="0" hint1="0" hint2="0" width="4373" height="2278" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e000015110000e6080000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_WEATHER" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_SEVERITY" left="20" top="10368" logicalid="3" controlid="3" masterid="0" hint1="0" hint2="0" width="3509" height="1859" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b50d000043070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_SEVERITY" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_DATE" left="3080" top="0" logicalid="4" controlid="4" masterid="0" hint1="0" hint2="0" width="3299" height="4373" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000e30c000015110000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_DATE" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_TRAFFIC_SIGNAL" left="12702" top="12289" logicalid="5" controlid="5" masterid="0" hint1="0" hint2="0" width="3980" height="3535" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00008c0f0000cf0d0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_TRAFFIC_SIGNAL" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_TIME" left="12702" top="6773" logicalid="6" controlid="6" masterid="0" hint1="0" hint2="0" width="3000" height="3116" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b00002c0c0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_TIME" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_LOCATION" left="9970" top="18223" logicalid="7" controlid="7" masterid="0" hint1="0" hint2="0" width="3064" height="3535" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000f80b0000cf0d0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_LOCATION" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="DIM_ROAD_STRUCTURE" left="8779" top="0" logicalid="8" controlid="8" masterid="0" hint1="0" hint2="0" width="4373" height="4373" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e00001511000015110000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_DIM_ROAD_STRUCTURE" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="3229" top="10898" logicalid="9" controlid="9" masterid="0" hint1="0" hint2="0" width="3000" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_SEVERITY]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="1" sourceattachpoint="17" destattachpoint="22" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="3529" y="11297" />
+                    <point x="4729" y="11297" />
+                    <point x="4729" y="11298" />
+                    <point x="5929" y="11298" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="4880" top="3874" logicalid="10" controlid="10" masterid="0" hint1="0" hint2="0" width="3535" height="5224" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_END_DATE]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="1" sourceattachpoint="7" destattachpoint="6" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="5279" y="4373" />
+                    <point x="5279" y="6585" />
+                    <point x="8115" y="6585" />
+                    <point x="8115" y="8798" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="8365" top="13498" logicalid="11" controlid="11" masterid="0" hint1="0" hint2="0" width="3537" height="5225" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_LOCATION]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="7" destid="1" sourceattachpoint="4" destattachpoint="9" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="11502" y="18223" />
+                    <point x="11502" y="16011" />
+                    <point x="8665" y="16011" />
+                    <point x="8665" y="13798" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="10002" top="9032" logicalid="12" controlid="12" masterid="0" hint1="0" hint2="0" width="3000" height="2566" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_END_TIME]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="6" destid="1" sourceattachpoint="18" destattachpoint="23" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12702" y="9431" />
+                    <point x="11502" y="9431" />
+                    <point x="11502" y="11298" />
+                    <point x="10302" y="11298" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="9465" top="3874" logicalid="13" controlid="13" masterid="0" hint1="0" hint2="0" width="1900" height="5224" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_ROAD_STRUCTURE]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="8" destid="1" sourceattachpoint="7" destattachpoint="12" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="10965" y="4373" />
+                    <point x="10965" y="6585" />
+                    <point x="9765" y="6585" />
+                    <point x="9765" y="8798" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="10002" top="12648" logicalid="14" controlid="14" masterid="0" hint1="0" hint2="0" width="3000" height="1808" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_TRAFFIC_SIGNAL]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="5" destid="1" sourceattachpoint="20" destattachpoint="29" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12702" y="14056" />
+                    <point x="11502" y="14056" />
+                    <point x="11502" y="12948" />
+                    <point x="10302" y="12948" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="10002" top="6832" logicalid="15" controlid="15" masterid="0" hint1="0" hint2="0" width="3000" height="3116" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_START_TIME]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="6" destid="1" sourceattachpoint="10" destattachpoint="17" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12702" y="7231" />
+                    <point x="11502" y="7231" />
+                    <point x="11502" y="9648" />
+                    <point x="10302" y="9648" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="3230" top="3874" logicalid="16" controlid="16" masterid="0" hint1="0" hint2="0" width="3535" height="5224" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_START_DATE]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="1" sourceattachpoint="1" destattachpoint="0" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="3629" y="4373" />
+                    <point x="3629" y="6585" />
+                    <point x="6465" y="6585" />
+                    <point x="6465" y="8798" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="4984" top="13498" logicalid="17" controlid="17" masterid="0" hint1="0" hint2="0" width="2331" height="5225" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_FACT_DIM_WEATHER]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="1" sourceattachpoint="6" destattachpoint="3" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="5383" y="18223" />
+                    <point x="5383" y="16011" />
+                    <point x="7015" y="16011" />
+                    <point x="7015" y="13798" />
+                  </connector>
+                </ddscontrol>
+              </dds>
+            </Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+            <Value>false</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+            <Value>true</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+            <Value>-8617</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+            <Value>-2022</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+            <Value>20</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+            <Value>0</Value>
+          </Annotation>
+          <Annotation>
+            <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+            <Value>75</Value>
+          </Annotation>
+        </Annotations>
+        <Dimensions>
+          <Dimension dwd:design-time-name="6550dbda-a1cd-4928-aa1b-4f9f067f0f04">
+            <ID>FACT ACCIDENT</ID>
+            <Name>FACT ACCIDENT</Name>
+            <DimensionID>FACT ACCIDENT</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID FACT</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID SEVERITY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID END DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID LOCATION</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID END TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID ROAD STRUCTURE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID TRAFFIC SIGNAL</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID START TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID START DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ID WEATHER</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>SUNRISE SUNSET</AttributeID>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+          <Dimension dwd:design-time-name="81cb7739-ad32-4047-b941-202fe919cd45">
+            <ID>DIM SEVERITY</ID>
+            <Name>DIM SEVERITY</Name>
+            <DimensionID>DIM SEVERITY</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID SEVERITY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>SEVERITY DESC</AttributeID>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+          <Dimension dwd:design-time-name="d78fdc52-d121-4d69-ab06-9185f4d40964">
+            <ID>ID END DATE</ID>
+            <Name>ID END DATE</Name>
+            <DimensionID>DIM DATE</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>FULL DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>DAY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>MONTH</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>QUARTER</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>YEAR</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>DAY OF WEEK</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>IS WEEKEND</AttributeID>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <HierarchyID>Hierarchy</HierarchyID>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+          <Dimension dwd:design-time-name="84560aaf-71ff-4d9c-9c88-67ffb6e9b2e5">
+            <ID>DIM LOCATION</ID>
+            <Name>DIM LOCATION</Name>
+            <DimensionID>DIM LOCATION</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID LOCATION</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>STREET</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>CITY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>COUNTY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>STATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>TIMEZONE</AttributeID>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <HierarchyID>Hierarchy</HierarchyID>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+          <Dimension dwd:design-time-name="606684fb-d701-4c51-87c9-37236ebe7fe2">
+            <ID>ID END TIME</ID>
+            <Name>ID END TIME</Name>
+            <DimensionID>DIM TIME</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>FULL TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>HOUR</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>MINUTE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>SECOND</AttributeID>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <HierarchyID>Hierarchy</HierarchyID>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+          <Dimension dwd:design-time-name="1349eb80-5ef8-47a6-9722-30b84b7a5e2b">
+            <ID>DIM ROAD STRUCTURE</ID>
+            <Name>DIM ROAD STRUCTURE</Name>
+            <DimensionID>DIM ROAD STRUCTURE</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID ROAD STRUCTURE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>AMENITY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>BUMP</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>JUNCTION</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>NO EXIT</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>RAILWAY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>ROUNDABOUT</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>STATION</AttributeID>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+          <Dimension dwd:design-time-name="3b6aa58d-2bd2-4d5e-a451-dfe644220414">
+            <ID>DIM TRAFFIC SIGNAL</ID>
+            <Name>DIM TRAFFIC SIGNAL</Name>
+            <DimensionID>DIM TRAFFIC SIGNAL</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID TRAFFIC SIGNAL</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>CROSSING</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>GIVE WAY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>STOP SIGN</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>TRAFFIC CALMING</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>TRAFFIC SIGNAL</AttributeID>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+          <Dimension dwd:design-time-name="e443701f-e12e-4a0a-bbe6-1bf4af41be68">
+            <ID>ID START TIME</ID>
+            <Name>ID START TIME</Name>
+            <DimensionID>DIM TIME</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>FULL TIME</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>HOUR</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>MINUTE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>SECOND</AttributeID>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <HierarchyID>Hierarchy</HierarchyID>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+          <Dimension dwd:design-time-name="90d0c00b-5343-47f5-a472-c758f719495d">
+            <ID>ID START DATE</ID>
+            <Name>ID START DATE</Name>
+            <DimensionID>DIM DATE</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>FULL DATE</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>DAY</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>MONTH</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>QUARTER</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>YEAR</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>DAY OF WEEK</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>IS WEEKEND</AttributeID>
+              </Attribute>
+            </Attributes>
+            <Hierarchies>
+              <Hierarchy>
+                <HierarchyID>Hierarchy</HierarchyID>
+              </Hierarchy>
+            </Hierarchies>
+          </Dimension>
+          <Dimension dwd:design-time-name="6359943b-18e4-4dbe-90ad-49fd75617c77">
+            <ID>DIM WEATHER</ID>
+            <Name>DIM WEATHER</Name>
+            <DimensionID>DIM WEATHER</DimensionID>
+            <Attributes>
+              <Attribute>
+                <AttributeID>ID WEATHER</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>WEATHER CONDITION</AttributeID>
+              </Attribute>
+              <Attribute>
+                <AttributeID>WIND DIRECTION</AttributeID>
+              </Attribute>
+            </Attributes>
+          </Dimension>
+        </Dimensions>
+        <MeasureGroups>
+          <MeasureGroup>
+            <ID>FACT ACCIDENT</ID>
+            <Name>FACT ACCIDENT</Name>
+            <Measures>
+              <Measure>
+                <ID>DISTANCE</ID>
+                <Name>DISTANCE</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>DISTANCE</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>TEMPERATURE</ID>
+                <Name>TEMPERATURE</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>TEMPERATURE</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>HUMIDITY</ID>
+                <Name>HUMIDITY</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>HUMIDITY</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>PRESSURE</ID>
+                <Name>PRESSURE</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>PRESSURE</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>VISIBILITY</ID>
+                <Name>VISIBILITY</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>VISIBILITY</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>WIND SPEED</ID>
+                <Name>WIND SPEED</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>WIND_SPEED</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>PRECIPITATION</ID>
+                <Name>PRECIPITATION</Name>
+                <Source>
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                    <ColumnID>PRECIPITATION</ColumnID>
+                  </Source>
+                </Source>
+              </Measure>
+              <Measure>
+                <ID>FACT ACCIDENT Count</ID>
+                <Name>FACT ACCIDENT Count</Name>
+                <AggregateFunction>Count</AggregateFunction>
+                <Source>
+                  <DataType>Integer</DataType>
+                  <DataSize>4</DataSize>
+                  <Source xsi:type="RowBinding">
+                    <TableID>dbo_FACT_ACCIDENT</TableID>
+                  </Source>
+                </Source>
+              </Measure>
+            </Measures>
+            <StorageMode>Molap</StorageMode>
+            <ProcessingMode>Regular</ProcessingMode>
+            <Dimensions>
+              <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="2127931c-7b99-48d4-bf2b-f3f868dd6849">
+                <CubeDimensionID>FACT ACCIDENT</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID FACT</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_FACT</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="15dcb067-6d3d-466c-92cd-0b291f901900">
+                <CubeDimensionID>DIM SEVERITY</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID SEVERITY</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_SEVERITY</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="3d4d9527-87e6-4d2e-8207-c224b995f30c">
+                <CubeDimensionID>ID END DATE</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID DATE</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_END_DATE</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="26c3a08e-004c-4a9e-a0fa-c2394e659a6b">
+                <CubeDimensionID>DIM LOCATION</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID LOCATION</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_LOCATION</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="3679939e-4fba-4bab-9dee-f57abd20fb55">
+                <CubeDimensionID>ID END TIME</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID TIME</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_END_TIME</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="5c4fe8d8-da5a-478d-ab53-f02c7b7d9449">
+                <CubeDimensionID>DIM ROAD STRUCTURE</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID ROAD STRUCTURE</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_ROAD_STRUCTURE</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="38e3f0cc-fdfb-4e07-9d31-3b364f2a8e82">
+                <CubeDimensionID>DIM TRAFFIC SIGNAL</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID TRAFFIC SIGNAL</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_TRAFFIC_SIGNAL</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="30928cf5-74dc-49c9-a8a1-2815e3da74dc">
+                <CubeDimensionID>ID START TIME</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID TIME</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_START_TIME</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="ba7bb7b6-3599-412e-99e0-be7a03b12d28">
+                <CubeDimensionID>ID START DATE</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID DATE</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_START_DATE</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+              <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="943869fc-5a8d-4a50-ace1-7f3cf27afca0">
+                <CubeDimensionID>DIM WEATHER</CubeDimensionID>
+                <Attributes>
+                  <Attribute>
+                    <AttributeID>ID WEATHER</AttributeID>
+                    <KeyColumns>
+                      <KeyColumn>
+                        <DataType>Integer</DataType>
+                        <Source xsi:type="ColumnBinding">
+                          <TableID>dbo_FACT_ACCIDENT</TableID>
+                          <ColumnID>ID_WEATHER</ColumnID>
+                        </Source>
+                      </KeyColumn>
+                    </KeyColumns>
+                    <Type>Granularity</Type>
+                  </Attribute>
+                </Attributes>
+              </Dimension>
+            </Dimensions>
+            <Partitions />
+          </MeasureGroup>
+        </MeasureGroups>
+        <Source>
+          <DataSourceViewID>US Accidents DW</DataSourceViewID>
+        </Source>
+      </Cube>
+    </ObjectDefinition>
+  </Alter>
+  <Process>
+    <Object xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+      <DatabaseID>SSAS</DatabaseID>
+    </Object>
+    <Type xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">ProcessFull</Type>
+    <WriteBackTableCreation xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">UseExisting</WriteBackTableCreation>
+  </Process>
+</Batch>

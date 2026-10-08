@@ -1,0 +1,23 @@
+-- b: Severity 4, Q2/2021; return every tied maximum (City, State).
+WITH
+SET [ThanhPho] AS
+    NONEMPTY(
+        [DIM LOCATION].[STATE].[STATE].MEMBERS
+        * [DIM LOCATION].[CITY].[CITY].MEMBERS,
+        [Measures].[FACT ACCIDENT Count]
+    )
+SET [ThanhPhoCaoNhat] AS
+    FILTER(
+        [ThanhPho],
+        [Measures].[FACT ACCIDENT Count]
+        = MAX([ThanhPho], [Measures].[FACT ACCIDENT Count])
+    )
+SELECT
+    {[Measures].[FACT ACCIDENT Count]} ON COLUMNS,
+    [ThanhPhoCaoNhat] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [ID START DATE].[YEAR].&[2021],
+    [ID START DATE].[QUARTER].&[2021]&[2],
+    [DIM SEVERITY].[ID SEVERITY].&[4]
+);

@@ -1,0 +1,21 @@
+# Visual Studio caches and local user settings
+.vs/
+**/.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Generated build outputs
+**/bin/
+**/obj/
+__pycache__/
+*.py[cod]
+
+# Empty nested clone of this same repository
+/DW-OLAP/
+
+# Local secrets
+.env
+.env.*
+!.env.example

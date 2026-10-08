@@ -1,0 +1,25 @@
+{
+  "backup": "D:\\OLAP\\Pro\\SSAS\\backups\\bef_20261007_231746",
+  "changed": [
+    {
+      "file": "D:\\OLAP\\Pro\\SSAS\\SSAS\\DIM TIME.dim",
+      "before_sha256": "fc025001612cdab554cfc29257b862d4f012303db66ca5d8cc35624db5e2eda5",
+      "after_sha256": "3e587106206d8f9ae1a7736ed97773b44e8520cb475d0c7e89ab8895edfbbfc8"
+    },
+    {
+      "file": "D:\\OLAP\\Pro\\SSAS\\SSAS\\DIM LOCATION.dim",
+      "before_sha256": "77237b5880a246f1547b2043bb62b25182fec752f5c41c61cbe2d95d16398c20",
+      "after_sha256": "0a6249f8e8fa69c52c9c3dc9f87f64ed821a8c2200726964cc00b1134bb49739"
+    },
+    {
+      "file": "D:\\OLAP\\Pro\\SSAS\\SSAS\\FACT ACCIDENT.dim",
+      "before_sha256": "c146b62c2beedd4ad14050f38d4ea7d79b8b512d04c85004058cdeecb3160516",
+      "after_sha256": "a902906b51adf43c95ba24720b01875df352b59e9ac066e7c50e9cd87641e76d"
+    },
+    {
+      "file": "D:\\OLAP\\Pro\\SSAS\\SSAS\\US Accidents DW.cube",
+      "before_sha256": "f81855c4f57caa75213e6b9e47083e08b2a0435012165fe26a42f50b124b50a3",
+      "after_sha256": "539dc5c76a5cc15e4f7001e51c25ad46f7083b7dffb432ac56c6fe5a524f0b95"
+    }
+  ]
+}
