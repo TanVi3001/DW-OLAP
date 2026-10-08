@@ -100,7 +100,7 @@
 - **Thời gian:** Năm → Quý → Tháng → Ngày
 - **Vị trí:** Toàn quốc → State → County → City → Street
 - **Mức độ:** ALL Severity → Từng mức (1, 2, 3, 4)
-- **Thời tiết:** Nhóm lớn (Mưa/Tuyết/Sương mù/Khác) → Weather_Condition chi tiết
+- **Thời tiết:** Weather_Condition và WIND_DIRECTION
 
 ---
 
@@ -134,24 +134,24 @@ Trong năm 2021, xếp hạng TOP 5 bang có tổng Distance lớn nhất, kèm 
 > *Ý nghĩa:* Tìm bang tê liệt nhất → zoom vào thành phố nào gây ra tình trạng đó. Phát hiện điểm nghẽn cứu hộ cụ thể.
 
 **i) 🔼 Roll-Up Severity: Detail → Tổng (dùng ROLLUP)**
-Theo từng mức độ nghiêm trọng (SEVERITY_DESC), tính thời gian xử lý tai nạn trung bình (chênh lệch End_Date/End_Time − Start_Date/Start_Time theo phút), tổng số vụ, tổng Distance, Visibility trung bình và tỷ lệ phần trăm số vụ trên toàn bộ dữ liệu. Thêm **1 dòng roll-up tổng** (ALL severity) ở cuối để so sánh từng mức với trung bình chung. Sắp xếp theo thời gian xử lý giảm dần.
-> *Ý nghĩa:* Dòng tổng giúp nhận ra: severity 2 chiếm 80% số vụ nhưng chỉ 30% Distance, còn severity 4 chiếm 2% số vụ nhưng 25% Distance.
+Theo từng mức độ nghiêm trọng (SEVERITY_DESC), thống kê tổng số vụ tai nạn, tỷ lệ số vụ trên toàn bộ dữ liệu, tổng Distance và Visibility trung bình. Thêm **một dòng tổng hợp tất cả mức độ** ở cuối để đối chiếu; sắp xếp theo tổng số vụ giảm dần.
+> *Ý nghĩa:* So sánh mức độ phổ biến và mức ảnh hưởng của các vụ tai nạn giữa các nhóm severity.
 
 **j)** Cho biết bang (State) có tổng số vụ tai nạn cao nhất và thấp nhất trong toàn bộ dữ liệu, kèm tổng Distance và tỷ lệ tai nạn mức 3–4, nhiệt độ trung bình (Temperature), độ ẩm trung bình (Humidity) và áp suất trung bình (Pressure). Trả về tất cả bang đồng hạng ở hai đầu.
 > *Ý nghĩa:* So sánh: bang nhiều vụ nhất có phải cũng nghiêm trọng nhất không? Hay bang ít vụ nhưng mỗi vụ đều nặng?
 
-**k)** Với mỗi quận (County) thuộc bang California (State = 'CA'), đưa ra 3 thành phố (City) có tổng số vụ tai nạn cao nhất kèm tầm nhìn trung bình (Visibility) và tốc độ gió trung bình (Wind_Speed). Nếu có các thành phố đồng hạng, hiển thị tất cả.
-> *Ý nghĩa:* Drill-down tự nhiên State → County → City trong phạm vi CA.
+**k)** Với mỗi quận (County) tại California (State = 'CA'), thống kê số vụ tai nạn, tầm nhìn trung bình (Visibility) và tốc độ gió trung bình (Wind_Speed) theo từng thành phố (City). Sắp xếp kết quả theo tổng số vụ giảm dần.
+> *Ý nghĩa:* So sánh tình hình tai nạn và điều kiện quan sát giữa các thành phố thuộc từng quận của California.
 
-**l) 🔼 Roll-Up Weather: Detail → Nhóm lớn**
-Với từng điều kiện thời tiết (Weather_Condition) không bị thiếu, thống kê số vụ, nhiệt độ trung bình, lượng mưa trung bình và Distance trung bình. **Thêm roll-up:** gom Weather_Condition chứa "Rain" thành **nhóm Mưa**, chứa "Snow" thành **nhóm Tuyết**, chứa "Fog" thành **nhóm Sương mù**, còn lại là **nhóm Khác**, và thống kê tổng theo từng nhóm.
-> *Ý nghĩa:* Weather_Condition có hàng chục giá trị (Light Rain, Heavy Rain...). Roll-up thành nhóm lớn giúp nhìn tổng quan: Mưa vs Tuyết vs Sương mù — nhóm nào nguy hiểm nhất?
+**l) Weather Condition × Wind Direction**
+Với từng tổ hợp điều kiện thời tiết (Weather_Condition) không bị thiếu và hướng gió (WIND_DIRECTION), thống kê số vụ tai nạn, nhiệt độ trung bình (Temperature), lượng mưa trung bình (Precipitation) và Distance trung bình.
+> *Ý nghĩa:* Xem điều kiện thời tiết và hướng gió nào thường đi cùng nhiều vụ tai nạn hơn.
 
-**m)** Theo từng loại đặc điểm hạ tầng, thống kê tổng số vụ, số vụ severity 4 (ID_SEVERITY = 4) và tỷ lệ phần trăm severity 4. Xét tất cả đặc điểm hạ tầng đường bộ (Amenity, Bump, Junction, No_Exit, Railway, Roundabout, Station) và tín hiệu giao thông (Crossing, Give_Way, Stop_Sign, Traffic_Calming, Traffic_Signal). Sắp xếp theo tỷ lệ giảm dần.
-> *Ý nghĩa:* So sánh toàn bộ loại hạ tầng — loại nào có tỷ lệ tai nạn chết người cao nhất?
+**m)** Với từng thuộc tính hạ tầng và tín hiệu giao thông hiện có (AMENITY, BUMP, JUNCTION, NO_EXIT, RAILWAY, ROUNDABOUT, STATION, CROSSING, GIVE_WAY, STOP_SIGN, TRAFFIC_CALMING, TRAFFIC_SIGNAL), so sánh hai nhóm có (True) và không có (False) thuộc tính đó. Thống kê số vụ tai nạn, số vụ severity 4 và tỷ lệ severity 4 trên tổng số vụ của từng nhóm; trình bày riêng kết quả cho từng thuộc tính.
+> *Ý nghĩa:* Đánh giá mối liên hệ giữa sự hiện diện của từng đặc điểm hạ tầng và mức độ nghiêm trọng của tai nạn. Mỗi cờ được phân tích riêng theo đúng cấu trúc hiện tại của mô hình.
 
 **n)** Tại New York (State = 'NY'), liệt kê 5 điều kiện thời tiết (không rỗng, không thiếu) có số vụ cao nhất, kèm số vụ, Distance trung bình, Visibility trung bình và tỷ lệ tai nạn ban đêm (Sunrise_Sunset = 'Night').
 > *Ý nghĩa:* Tìm điều kiện thời tiết nguy hiểm nhất tại NY (mùa đông khắc nghiệt) để cảnh báo tài xế.
 
-**o)** Trong năm 2022, đưa ra TOP 5 bang có số vụ severity 3–4 cao nhất, với thời tiết chứa "Rain" hoặc "Fog" và tai nạn tại giao lộ (Junction = 1) hoặc nơi có đèn giao thông (Traffic_Signal = 1). Với mỗi bang hiển thị số vụ, Distance trung bình và Visibility trung bình; mỗi vụ chỉ tính một lần.
-> *Ý nghĩa:* Phân tích đa chiều phức tạp nhất — kết hợp thời gian + thời tiết + hạ tầng + severity.
+**o)** Trong năm 2022, tìm Top 5 bang có nhiều vụ severity 3–4 nhất trong điều kiện thời tiết chứa "Rain" hoặc "Fog", đồng thời xảy ra tại giao lộ (Junction = 1) hoặc nơi có đèn giao thông (Traffic_Signal = 1). Kèm số vụ, Distance trung bình và Visibility trung bình của mỗi bang. Nếu một vụ thỏa cả Junction = 1 lẫn Traffic_Signal = 1, chỉ tính vụ đó một lần.
+> *Ý nghĩa:* Xác định các bang có nhiều vụ nghiêm trọng nhất trong điều kiện mưa hoặc sương mù tại các vị trí có đặc điểm hạ tầng liên quan.
