@@ -53,7 +53,9 @@ Truy vấn chạy trên toàn bộ các năm; không thêm bộ lọc năm 2021 
 
 Có 124 dòng năm/quý/tháng có dữ liệu. Ô null là không có vụ thuộc tổ hợp tương ứng. Những vụ không có nhãn Day/Night không thuộc bốn cột này.
 
-## 4. Câu f — f1.mdx và f2.mdx
+## 4. Phiên bản câu f cũ — f1.mdx và f2.mdx
+
+**Câu f hiện tại đã đổi sang Top 5 cặp đường–thành phố tại California**, giữ Night, Traffic_Signal=1 và đồng hạng thứ 5; xem [đề bài hiện tại](../../Tai_lieu/ngu_canh_va_bo_cau_hoi_nghiep_vu.md) và [hướng dẫn manual/Pivot](../../Tai_lieu/Huong_dan_cau_f_Top5.md). Hai file f1/f2 bên dưới lưu phiên bản cũ, chưa phải MDX của câu f mới.
 
 ### Bước 1: f1.mdx
 

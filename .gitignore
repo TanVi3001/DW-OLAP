@@ -6,6 +6,10 @@
 *.userosscache
 *.sln.docstates
 
+# Temporary Office lock files
+~$*.xlsx
+~$*.docx
+
 # Generated build outputs
 **/bin/
 **/obj/

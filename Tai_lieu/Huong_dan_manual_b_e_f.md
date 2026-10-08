@@ -2,15 +2,15 @@
 
 ## 1. File đã đọc và công cụ sử dụng
 
-- Đề: `ngu_canh_va_bo_cau_hoi_nghiep_vu.md`, phần 15 câu hỏi.
-- Báo cáo: `24520814_24521985_SSIS.docx`, phần SSAS, PivotTable và MDX.
-- Cấu trúc SQL: `QueryProject.sql`.
+- Đề: [Ngữ cảnh và 15 câu hỏi](ngu_canh_va_bo_cau_hoi_nghiep_vu.md).
+- Báo cáo: [Báo cáo SSIS](Bao_cao/24520814_24521985_SSIS.docx), phần SSAS, PivotTable và MDX.
+- Cấu trúc SQL: [QueryProject.sql](../SQL/QueryProject.sql).
 - Project thực tế: `SSAS/SSAS.slnx`, `SSAS/SSAS/SSAS.dwproj`, các file `.dim`, `.dsv`, `.cube`.
 - Dữ liệu đối chiếu: `archive/Accidents_500.csv`, đúng 500.000 dòng.
 
 Làm bằng **Visual Studio có extension Microsoft Analysis Services Projects**, sau đó kéo thả trên **Excel desktop cho Windows**. VS Code có thể đọc file nhưng các màn hình Dimension Structure, Attribute Relationships và Cube Designer dưới đây nằm trong Visual Studio.
 
-Không cần chạy lại `QueryProject.sql`: file đó có lệnh DROP/TRUNCATE. Hướng dẫn này dùng kho dữ liệu đã nạp.
+Không cần chạy lại `SQL/QueryProject.sql`: file đó có lệnh DROP/TRUNCATE. Hướng dẫn này dùng kho dữ liệu đã nạp.
 
 Severity là mức ảnh hưởng đến giao thông; không suy ra số người chết hoặc bị thương từ mức 4.
 
@@ -147,8 +147,8 @@ DSV đã có `FACT_ACCIDENT.SUNRISE_SUNSET`, nhưng dimension FACT ACCIDENT hi�
 7. Chọn database SSAS **SSAS**, chọn cube **US Accidents DW** → Next → Finish.
 8. Trong Import Data, chọn **PivotTable Report → New worksheet → OK**.
 9. Chọn PivotTable → **PivotTable Analyze → Field List** để hiện danh sách trường.
-10. Đổi tên sheet đầu thành **b**. Sao chép sheet này bằng chuột phải tab → **Move or Copy → Create a copy**, hoặc tạo Pivot mới từ cùng connection. Đặt các sheet **e**, **f_1**, **f_2**, **f_hour**.
-11. Khi sao chép, kéo các trường đang dùng ra khỏi Rows/Columns/Filters/Values để bố trí lại cho bài mới. Kiểm tra bộ lọc của từng sheet, nhất là Severity.
+10. Lưu mỗi câu trong một workbook riêng ở `Pivot_Excel/`: **Pivot_b.xlsx**, **Pivot_e.xlsx**, **Pivot_f.xlsx**.
+11. Tạo workbook mới và kết nối lại theo các bước trên khi chuyển câu; kiểm tra bộ lọc của từng Pivot, nhất là Severity.
 
 Đây là Pivot nối trực tiếp cube, có danh sách dimension và measure SSAS. Không cần nhập CSV để làm bài kéo thả này.
 
@@ -223,122 +223,49 @@ Tổng chỉ Day/Night không bao gồm những dòng thiếu Sunrise_Sunset. B�
 
 Đề gốc ghi “dùng ROLLUP”. Pivot thực hiện thao tác roll-up bằng hierarchy/subtotal; nếu giảng viên còn yêu cầu truy vấn có từ khóa SQL ROLLUP thì ảnh Pivot này cần đi cùng truy vấn đó. Hướng dẫn hiện tại tập trung phần kéo thả theo yêu cầu.
 
-## 6. Câu f, bước 1: bang nhiều vụ ban đêm tại nơi có đèn giao thông
+## 6. Câu f: Top 5 cặp đường–thành phố tại California
 
-### 6.1. Kéo các trường trên sheet f_1
+Liệt kê Top 5 cặp đường và thành phố tại California (`State = 'CA'`) có số vụ tai nạn cao nhất, chỉ tính các vụ xảy ra ban đêm (`Sunrise_Sunset = 'Night'`) tại nơi có đèn giao thông (`Traffic_Signal = 1`), kèm số vụ của từng địa điểm và lấy cả các địa điểm đồng hạng ở vị trí thứ 5.
 
-| Vùng Pivot | Trường |
-|---|---|
-| Filters | DIM TRAFFIC SIGNAL → TRAFFIC SIGNAL |
-| Filters | FACT ACCIDENT → SUNRISE SUNSET |
-| Rows | DIM LOCATION → STATE |
-| Columns | DIM SEVERITY → ID SEVERITY |
-| Values | FACT ACCIDENT Count |
+Thực hiện theo [hướng dẫn câu f](Huong_dan_cau_f_Top5.md): manual Visual Studio trước, Pivot Excel sau. Bộ lọc là **STATE=CA**, **TRAFFIC SIGNAL=True**, **SUNRISE SUNSET=Night**; measure là **FACT ACCIDENT Count**. Xác định thứ hạng trên STREET toàn bang trước khi thêm CITY để trình bày.
 
-1. TRAFFIC SIGNAL chọn **True/1**, tùy nhãn BIT hiện trong cube.
-2. SUNRISE SUNSET chọn **Night**.
-3. Severity giữ **tất cả mức 1, 2, 3, 4**. Không lọc chỉ 3–4 vì mẫu số cần tất cả vụ thỏa điều kiện đèn giao thông + ban đêm.
-4. Không thêm lọc năm: câu f dùng toàn bộ dữ liệu.
-5. **Design → Grand Totals → On for Rows and Columns** để có tổng mỗi bang ở cột bên phải.
-6. Chuột phải một ô **Grand Total của bang** → **Sort → Largest to Smallest**.
-7. Bang đứng đầu là bang dùng ở bước 2. Nếu có bang đồng hạng, thực hiện bước 2 cho từng bang đó.
+Kết quả đã đối chiếu từ cube ngày 08/10/2026:
 
-### 6.2. Tỷ lệ mức 3–4 bằng thao tác Excel
+| City | Street | Số vụ |
+|---|---|---:|
+| Los Angeles | I-5 N | 11 |
+| Los Angeles | I-10 E | 10 |
+| Los Angeles | Harbor Fwy S | 9 |
+| Culver City | I-405 N | 8 |
+| Los Angeles | E Imperial Hwy | 8 |
+| Los Angeles | E Olympic Blvd | 8 |
 
-Tỷ lệ = (số vụ mức 3 + số vụ mức 4) / tổng số vụ của chính bang, trong điều kiện đèn giao thông + Night.
+Vị trí thứ 5 đạt 8 vụ; có 6 địa điểm vì giữ cả đồng hạng. Nếu dữ liệu thay đổi, xác định lại ngưỡng thứ 5.
 
-1. Ở cột trống ngay bên phải Pivot, gõ tiêu đề **Tỷ lệ mức 3–4**.
-2. Tại dòng bang đầu, gõ `=(`, nhấp ô số vụ mức 3, gõ `+`, nhấp ô số vụ mức 4, gõ `)/`, nhấp ô Grand Total của chính dòng đó → Enter.
-3. Excel có thể tự tạo GETPIVOTDATA khi nhấp ô. Để kéo công thức xuống theo từng dòng một cách đơn giản, tắt **PivotTable Analyze → Options ▼ → Generate GetPivotData** rồi nhập lại bằng cách nhấp các ô.
-4. Ví dụ nếu A là bang; B/C/D/E là mức 1/2/3/4; F là Grand Total; dòng đầu là 5: công thức ở G5 là `=(D5+E5)/F5`.
-5. Chọn ô kết quả → **Home → Number → Percentage**, đặt 2 chữ số thập phân; kéo fill handle xuống các dòng bang, dừng trước dòng Grand Total toàn quốc.
-6. Nếu cube không có một cột severity vì không có dữ liệu, chọn đúng các ô hiện hữu; mức không có vụ đóng góp 0, không cố dùng vị trí D/E của ví dụ.
-7. Sau khi Refresh/sắp xếp lại, kiểm tra công thức còn nằm đúng dòng bang và không bị Pivot mở rộng đè lên.
+## 7. Lưu kết quả và ảnh manual
 
-**Đã kiểm chứng trên cube:** California (**CA**) đứng đầu: **3.046 vụ**, mức 3–4 **258 vụ**, tỷ lệ **8,47%**.
+- Workbook b, e: [Pivot_Excel/](../Pivot_Excel/). Lưu câu f vào `Pivot_Excel/Pivot_f.xlsx` khi hoàn thành.
+- Manual: chụp bảng kết quả cùng bộ lọc và lưu trong thư mục `Ket_qua/` của project.
+- **b:** giữ ảnh Q2/2021, severity 4 và City/State có số vụ cao nhất.
+- **e:** giữ ảnh cấp tháng, quý, năm với IS WEEKEND và Day/Night.
+- **f:** giữ ảnh STATE=CA, TRAFFIC SIGNAL=True, SUNRISE SUNSET=Night và danh sách Top 5 kèm đồng hạng.
 
-## 7. Câu f, bước 2: City → Street, lọc trên 50 vụ
+Ctrl+S trong Visual Studio lưu project. Thay trường hoặc bộ lọc trong Browser không cần Deploy lại; lưu ảnh trước khi đổi sang câu tiếp theo.
 
-### 7.1. Kéo các trường trên sheet f_2
-
-| Vùng Pivot | Trường |
-|---|---|
-| Filters | DIM LOCATION → STATE |
-| Filters | DIM TRAFFIC SIGNAL → TRAFFIC SIGNAL |
-| Filters | FACT ACCIDENT → SUNRISE SUNSET |
-| Rows, đầu tiên | DIM LOCATION → CITY |
-| Rows, tiếp theo | DIM LOCATION → STREET |
-| Values | FACT ACCIDENT Count |
-
-1. STATE chọn bang đứng đầu ở f_1, ví dụ **CA**.
-2. TRAFFIC SIGNAL giữ **True/1**; SUNRISE SUNSET giữ **Night**.
-3. Severity giữ tất cả. Không mang lọc Severity 4 từ câu b sang.
-4. **Design → Report Layout → Show in Tabular Form → Repeat All Item Labels**.
-5. **Design → Subtotals → Do Not Show Subtotals**; tắt Grand Totals nếu chỉ cần danh sách đường.
-6. Mở mũi tên **STREET → Value Filters → Greater Than**.
-7. Chọn **FACT ACCIDENT Count**, nhập **50** → OK.
-8. Lọc đúng field STREET; điều kiện là **> 50**, không phải >= 50 và không đặt ở CITY.
-
-### 7.2. Kết quả rỗng trong file 500.000 dòng là hợp lệ
-
-Trong cube đã kiểm tra ngày 08/10/2026, **không có đường nào ở CA thỏa >50 vụ** dưới đồng thời hai điều kiện Traffic_Signal=True và Sunrise_Sunset=Night. Đường nhiều nhất là **I-5 N, Los Angeles: 11 vụ**.
-
-Nếu cube nạp đúng mẫu đó, sau khi áp dụng >50 Pivot sẽ không còn dòng đường. Chụp lại Pivot với STATE=CA, TRAFFIC SIGNAL=True, SUNRISE SUNSET=Night và bộ lọc >50 để báo cáo:
-
-> California có tổng số vụ cao nhất trong nhóm có đèn giao thông và xảy ra ban đêm. Khi drill-down theo thành phố và đường, không có đường nào có trên 50 vụ trong bộ dữ liệu 500.000 bản ghi, nên bước 2 không trả về dòng kết quả.
-
-Không đổi điều kiện đề để tạo ra kết quả. Nếu cube đang nạp file `Accidents(16-23).csv` hoặc tập dữ liệu khác, số liệu và danh sách đường có thể khác; dùng kết quả của cube thực tế.
-
-## 8. Cách kéo thả tìm giờ nhiều vụ nhất cho mỗi đường
-
-Phần này dùng khi dữ liệu thực tế có đường >50. Với mẫu 500.000 dòng, có thể dùng riêng một đường làm minh họa thao tác; minh họa không thuộc đáp án f bước 2.
-
-### 8.1. Xem một đường, cách dễ nhất
-
-1. Trên sheet **f_hour**, giữ các Filters: STATE, TRAFFIC SIGNAL=True, SUNRISE SUNSET=Night.
-2. Kéo thêm **CITY** và **STREET** vào Filters; chọn đúng một cặp city/street từ danh sách f_2.
-3. Kéo **ID START TIME → HOUR** vào Rows.
-4. Kéo **FACT ACCIDENT Count** vào Values.
-5. Chuột phải ô số vụ → **Sort → Largest to Smallest**.
-6. Giờ ở đầu có số vụ lớn nhất. Nếu nhiều giờ có cùng số vụ lớn nhất, ghi lại tất cả các giờ đó.
-7. Giờ H thể hiện khoảng H:00 đến trước (H+1):00, ví dụ 20 là 20:00–20:59; đây là giờ bắt đầu tai nạn, không phải giờ kết thúc.
-8. Lặp lại cho mỗi đường thỏa >50. Ghi City, Street, tổng số vụ từ f_2, giờ cao điểm và số vụ ở giờ đó vào bảng kết luận.
-
-**Minh họa ngoài đáp án f:** lọc CA / Los Angeles / I-5 N / Traffic Signal=True / Night. Tổng 11 vụ; các giờ **02, 05, 20** đồng hạng cao nhất, mỗi giờ **2 vụ**.
-
-### 8.2. Xem nhiều đường cùng lúc
-
-1. Tạo Pivot với Filters giống f_2.
-2. Rows: **CITY → STREET**; Columns: **ID START TIME → HOUR**; Values: **FACT ACCIDENT Count**.
-3. Chỉ giữ các đường đã xác định thỏa >50 ở f_2. Nếu thêm HOUR làm bộ lọc >50 thay đổi theo giờ đang chọn, dùng danh sách f_2 để chọn các member STREET cần xem, giữ toàn bộ giờ.
-4. Bật tổng mỗi dòng; tổng các ô giờ của một đường phải bằng tổng số vụ đường đó ở f_2.
-5. Chọn vùng số vụ theo giờ → **Home → Conditional Formatting → Color Scales** để nhìn giờ nổi bật.
-6. Đọc ô lớn nhất trên từng dòng STREET và ghi các tiêu đề giờ tương ứng; giữ tất cả giờ đồng hạng. Không lấy dòng subtotal CITY làm kết quả của STREET.
-7. Không áp dụng Top 1 chung lên HOUR để tìm giờ cho mọi đường: mỗi đường có giờ cực đại riêng. Cách 8.1 là cách manual dễ kiểm chứng nhất.
-
-## 9. Nội dung nên chụp để đưa vào báo cáo
-
-- **b:** bộ lọc năm 2021, quý 2, severity 4 và bảng City/State có số vụ lớn nhất; giữ tất cả đồng hạng.
-- **e:** một Pivot mở đến tháng, có subtotal quý/năm, các cột IS WEEKEND và Day/Night; thêm ảnh thu gọn cấp quý hoặc năm nếu cần minh họa roll-up.
-- **f_1:** bộ lọc đèn giao thông + Night, các mức severity, tổng số vụ và tỷ lệ mức 3–4; bang đứng đầu hiện rõ.
-- **f_2:** bộ lọc bang đứng đầu + đèn giao thông + Night, STREET >50. Với mẫu đã kiểm tra, ghi nhận kết quả rỗng.
-- **f_hour:** chỉ đưa vào đáp án chính khi có đường >50; nếu minh họa đường I-5 N thì ghi rõ đây là minh họa thao tác ngoài tập kết quả.
-
-## 10. Kiểm tra nhanh khi kết quả khác dự kiến
+## 8. Kiểm tra nhanh khi kết quả khác dự kiến
 
 | Hiện tượng | Kiểm tra |
 |---|---|
 | Không thấy Day/Night | Attribute SUNRISE SUNSET trong FACT ACCIDENT; cube visibility; Deploy/Process; Refresh connection Excel |
 | Nhiều dòng 2021 hoặc CA giống nhau | KeyColumns còn chứa cột cấp chi tiết; sửa theo bảng và Process Full |
-| HOUR có nhiều member cùng nhãn | HOUR phải chỉ có khóa HOUR; Process lại DIM TIME/cube |
-| Quý 2 xuất hiện nhiều lần | Khóa YEAR + QUARTER tạo quý riêng mỗi năm; chọn Q2 dưới năm 2021 |
-| Tỷ lệ mức 3–4 thành 100% | Đang lọc chỉ severity 3/4; bỏ lọc đó để giữ mẫu số tất cả severity |
-| f_2 rỗng | Có thể đúng: mẫu này đường nhiều nhất chỉ 11 vụ; xác nhận điều kiện và nguồn ETL |
-| Số vụ khác CSV | Nguồn nạp khác, ETL xử lý thiếu, fact bị nạp trùng, lọc còn sót, hoặc dùng ngày/giờ kết thúc |
+| Quý 2 xuất hiện nhiều lần | Chọn riêng Q2 dưới năm 2021 trong hierarchy, không chọn thêm cả năm |
+| f thiếu hoặc dư đường | Kiểm tra ba bộ lọc; xác định ngưỡng thứ 5 trên STREET toàn CA trước khi thêm CITY; giữ đồng hạng |
+| Không kéo CITY riêng được | Lấy attribute CITY trong DIM LOCATION → More Fields thay vì cấp CITY dưới Location_BEF |
+| Số vụ khác CSV | Nguồn nạp, xử lý ETL, fact trùng, bộ lọc còn sót hoặc dùng ngày kết thúc |
 
-Các số đối chiếu b, e, f ở trên đã được truy vấn trực tiếp trên cube sau khi bạn Deploy/Process thành công ngày 08/10/2026. Các file MDX đã kiểm chứng nằm trong `SSAS/MDX_b_e_f/`; bạn có thể hoàn thành phần kéo thả trước theo hướng dẫn này.
+Các file trong [SSAS/MDX_b_e_f/](../SSAS/MDX_b_e_f/) lưu truy vấn trước đó; f1/f2 dùng phiên bản đề f cũ và chưa tương ứng câu Top 5 hiện tại.
 
-## 11. Tài liệu Microsoft đã kiểm tra
+## 9. Tài liệu Microsoft đã kiểm tra
 
 - Khóa ghép quý/tháng trong dimension: https://learn.microsoft.com/en-us/analysis-services/multidimensional-tutorial/lesson-3-4-modifying-the-date-dimension
 - Hierarchy và đường dẫn điều hướng: https://learn.microsoft.com/en-us/analysis-services/multidimensional-models-olap-logical-dimension-objects/user-hierarchies

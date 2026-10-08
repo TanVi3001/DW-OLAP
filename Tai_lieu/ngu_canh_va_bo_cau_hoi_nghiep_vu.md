@@ -121,10 +121,9 @@ Theo từng năm, thống kê tổng số vụ tai nạn **toàn quốc** cho t�
 Thống kê số vụ tai nạn xảy ra ban ngày (Sunrise_Sunset = 'Day') và ban đêm (Sunrise_Sunset = 'Night') ở 3 mức tổng hợp: theo **tháng**, roll-up lên **quý**, và roll-up lên **năm**. Hiển thị cả 3 mức trong cùng kết quả, phân biệt ngày thường (IS_WEEKEND = 0) và cuối tuần (IS_WEEKEND = 1).
 > *Ý nghĩa:* Cùng 1 truy vấn cho 3 góc nhìn (tháng/quý/năm) — ứng dụng điển hình của `ROLLUP` trong OLAP. Xem trend Day/Night từ chi tiết đến tổng quát.
 
-**f) 🔽 Drill-Down Location: State → City → Street**
-**Bước 1 (tổng quan):** Thống kê tổng số vụ tai nạn tại nơi có đèn giao thông (Traffic_Signal = 1) và xảy ra vào ban đêm (Sunrise_Sunset = 'Night') theo **từng bang**, kèm tỷ lệ tai nạn mức 3–4.
-**Bước 2 (drill-down):** Với bang có số vụ cao nhất, liệt kê **các con đường (Street, City)** có trên 50 vụ, kèm tổng số vụ và khung giờ (Hour) có nhiều vụ nhất.
-> *Ý nghĩa:* Đi từ tổng thể (bang nào tệ nhất?) → chi tiết (con đường nào cần sửa đèn?). Mô phỏng hành vi phân tích thực tế của người dùng OLAP.
+**f) 🔽 Drill-Down Location: California → City → Street**
+Liệt kê **Top 5 cặp đường và thành phố** tại California (`State = 'CA'`) có số vụ tai nạn cao nhất, chỉ tính các vụ xảy ra ban đêm (`Sunrise_Sunset = 'Night'`) tại nơi có đèn giao thông (`Traffic_Signal = 1`), kèm số vụ của từng địa điểm và lấy cả các địa điểm đồng hạng ở vị trí thứ 5.
+> *Ý nghĩa:* Xác định các đường tập trung nhiều vụ tai nạn ban đêm tại nơi có đèn giao thông trong California để ưu tiên khảo sát.
 
 **g) 🔼🔽 Roll-Up + Drill-Down Time: Năm ↔ Quý (dùng ROLLUP)**
 Theo từng năm và quý từ 2019 đến 2022, thống kê tổng số vụ tai nạn; phần trăm tăng/giảm so với cùng quý năm trước (YoY%); tỷ lệ vụ mức 3–4 (ID_SEVERITY IN (3, 4)); và tỷ lệ vụ ban đêm (Sunrise_Sunset = 'Night'). Dùng `ROLLUP(YEAR, QUARTER)` để hiển thị **cả tổng theo năm và chi tiết theo quý** trong cùng kết quả.
