@@ -27,7 +27,7 @@ Thao tác trên cube <code>US Accidents DW</code> trong database <code>SSAS</cod
 
 Thứ tự thao tác tương đương là: **YEAR ở Rows + FACT ACCIDENT Count ở Values + một cờ hạ tầng = True + (không lọc State hoặc State = CA)**. Tổng cộng có 8 lượt xem kết quả: 4 điều kiện × 2 phạm vi địa lý.
 
-**Ảnh minh chứng cho manual:** chụp mỗi kết quả sao cho nhìn được tên dimension/thuộc tính đang lọc, member <code>True</code>, trạng thái State (<code>All</code> hoặc <code>CA</code>), các năm và measure count. Có thể chụp một ảnh cho mỗi điều kiện toàn quốc và một ảnh cho mỗi điều kiện California (tổng 8 ảnh). Đặt chú thích từ **Hình 3.10.1** đến **Hình 3.10.8**, theo thứ tự: Junction toàn quốc/CA, Roundabout toàn quốc/CA, Railway toàn quốc/CA, Traffic Signal toàn quốc/CA.
+**Ảnh minh chứng manual gọn:** chỉ cần chụp hai trạng thái của ví dụ Junction: một ảnh State = All và một ảnh sau khi đổi State = CA. Ảnh phải cho thấy filter, YEAR và FACT ACCIDENT Count. Trong báo cáo, ghi rõ cùng thao tác được lặp lại lần lượt cho Roundabout, Railway và Traffic Signal; số liệu của cả bốn điều kiện vẫn phải có trong bảng kết quả. Chỉ bổ sung ảnh cho đủ tám lượt chạy nếu giảng viên/rubric yêu cầu minh chứng riêng cho từng bộ lọc.
 
 ### 2. Thực hiện bằng PivotTable Excel
 
@@ -125,7 +125,7 @@ FROM [US Accidents DW];
 
 Tên member <code>&amp;[True]</code> phản ánh key BIT sau khi SSAS đưa vào dimension. Dòng US không có State tuple nên dùng toàn bộ bang; dòng CA thêm member State California. NONEMPTY chỉ trả năm có dữ liệu và YEAR là trục hàng để kết quả tăng dần theo key năm.
 
-**Ảnh minh chứng cho MDX:** chụp một ảnh có phần đầu và thân truy vấn trong editor; chụp thêm ảnh kết quả có đủ 8 cột và các năm. Nếu màn hình không đủ rộng, dùng hai ảnh thay vì thu nhỏ chữ đến mức khó đọc. Chú thích lần lượt **Hình 3.10.13. Truy vấn MDX câu a** và **Hình 3.10.14. Kết quả MDX câu a**.
+**Ảnh minh chứng cho MDX:** chụp một ảnh có phần đầu và thân truy vấn trong editor; chụp thêm ảnh kết quả có đủ 8 cột và các năm. Nếu màn hình không đủ rộng, dùng hai ảnh thay vì thu nhỏ chữ đến mức khó đọc. Chú thích lần lượt **Hình 3.10.7. Truy vấn MDX câu a** và **Hình 3.10.8. Kết quả MDX câu a**.
 
 ### 4. Kết quả và nhận xét
 
@@ -203,8 +203,10 @@ Năm 2023 có số đếm thấp hơn rõ rệt ở cả bốn điều kiện; c
 
 | Số hình | Nội dung ảnh | Vị trí đặt |
 |---|---|---|
-| 3.10.1–3.10.8 | Cube Browser: 4 điều kiện × Toàn quốc/California | Cuối tiểu mục manual, sau khi mô tả từng lượt lọc |
-| 3.10.9–3.10.12 | Excel: sheet Junction, Roundabout, Railway, Traffic_Signal; mỗi sheet có hai PivotTable | Tiểu mục Pivot Excel, ngay sau giải thích cách bố trí |
-| 3.10.13–3.10.14 | Editor MDX và bảng kết quả MDX | Tiểu mục MDX, sau câu lệnh và mô tả kết quả |
+| 3.10.1–3.10.2 | Cube Browser: Junction với State = All và State = CA (ví dụ cách lọc manual) | Tiểu mục manual |
+| 3.10.3–3.10.6 | Excel: bốn sheet Junction, Roundabout, Railway, Traffic_Signal; mỗi sheet có PivotTable Toàn quốc và California | Tiểu mục Pivot Excel |
+| 3.10.7–3.10.8 | Editor MDX và bảng kết quả MDX | Tiểu mục MDX |
+
+Nếu cần lưu bằng chứng cho cả tám lần chạy Cube Browser, chụp thêm và đưa vào phụ lục; không cần trình bày tám ảnh lớn liên tiếp trong nội dung chính.
 
 > Trước khi nộp, thay tất cả vị trí ảnh minh họa bằng screenshot thật và kiểm tra tên database/cube, filter, tiêu đề, số liệu. Nếu báo cáo chính dùng cách đánh số hình khác, tiếp tục số hình của chương đó thay vì giữ số 3.10.x.
