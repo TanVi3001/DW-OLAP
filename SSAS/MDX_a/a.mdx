@@ -39,8 +39,6 @@ SELECT
     [Measures].[US Traffic Signal],
     [Measures].[CA Traffic Signal]
 } ON COLUMNS,
-NONEMPTY(
-    [ID START DATE].[YEAR].Levels(1).Members,
-    [Measures].[FACT ACCIDENT Count]
-) ON ROWS
+[ID START DATE].[YEAR].MEMBERS ON ROWS
 FROM [US Accidents DW];
+

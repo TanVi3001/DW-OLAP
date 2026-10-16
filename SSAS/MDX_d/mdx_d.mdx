@@ -1,0 +1,12 @@
+--QUERY 4--
+//Với mỗi bang, tính tỷ lệ vụ tai nạn trong điều kiện sương mù (Weather_Condition chứa "Fog") trên tổng số vụ của bang trong năm 2022. Chỉ hiển thị bang có tỷ lệ trên 5%, sắp xếp tỷ lệ giảm dần.
+SELECT 
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[Fog_Accident_Rate]
+    } ON COLUMNS,
+    [States_Fog_Rate_Over_5Pct] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [ID START DATE].[YEAR].&[2022]
+);

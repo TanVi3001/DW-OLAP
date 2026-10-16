@@ -106,43 +106,158 @@ Sau mỗi sheet, nếu Excel sắp xếp năm giảm dần, nhấp phải năm �
 
 ### 3. Thực hiện bằng MDX
 
-#### 3.1 Chạy truy vấn
+Thay vì dùng `WITH` để khai báo measure tạm thời trong từng câu query, mục này hướng dẫn **tạo Calculated Member trực tiếp trong Visual Studio** (lưu vĩnh viễn vào cube). Sau khi deploy, câu `SELECT` trong SSMS trở nên ngắn gọn và ai cũng dùng lại được mà không cần khai báo lại.
 
-Có thể mở SQL Server Management Studio (SSMS), kết nối kiểu **Analysis Services** đến instance của nhóm, chọn **New MDX Query**, dán truy vấn bên dưới và nhấn **Execute/F5**. Cũng có thể dùng cửa sổ MDX Query của Visual Studio nếu phiên bản đang cài hỗ trợ. Truy vấn chỉ đọc cube, không cần sửa/deploy project.
+Lưu truy vấn cuối cùng trong project tại `SSAS/MDX_a/a.mdx`.
 
-Lưu truy vấn trong project tại <code>SSAS/MDX_a/a.mdx</code>.
+---
 
-~~~mdx
-WITH
-MEMBER [Measures].[US Junction] AS
+#### Bước 1 - Mở tab Calculations trong Visual Studio
+
+Mở solution SSAS trong Visual Studio. Trong **Solution Explorer**, mở `Cubes` → nhấp đúp **`US Accidents DW.cube`** → chọn tab **Calculations** (nằm ở hàng tab trên cùng của Cube Designer, giữa tab Measures và KPIs).
+
+**Chụp và chèn ngay tại đây:** chụp màn hình tab Calculations đang mở, thấy thanh toolbar có nút **New Calculated Member**. Chú thích **Hình 3.10.15. Tab Calculations trong Cube Designer**.
+
+---
+
+#### Bước 2 - Tạo tám Calculated Member
+
+Với mỗi member dưới đây, nhấn nút **New Calculated Member** (biểu tượng `fx+` trên toolbar), điền **Name** và **Expression**, sau đó nhấn **Enter** hoặc chuyển sang member tiếp theo. **Parent hierarchy** luôn để là `Measures`.
+
+**Member 1 — US Junction**
+
+```
+Name:       US Junction
+Expression:
     ([Measures].[FACT ACCIDENT Count],
      [DIM ROAD STRUCTURE].[JUNCTION].&[True])
-MEMBER [Measures].[CA Junction] AS
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **toàn quốc** xảy ra tại vị trí có **giao lộ** (`Junction = 1`). Tuple kết hợp measure đếm vụ với member `True` trên chiều `JUNCTION` — không lọc State nên SSAS tự tổng hợp tất cả bang. Tạo member này để chỉ cần gọi `[Measures].[US Junction]` thay vì lặp lại điều kiện lọc trong mọi query.
+
+
+---
+
+**Member 2 — CA Junction**
+
+```
+Name:       CA Junction
+Expression:
     ([Measures].[FACT ACCIDENT Count],
      [DIM LOCATION].[STATE].&[CA],
      [DIM ROAD STRUCTURE].[JUNCTION].&[True])
-MEMBER [Measures].[US Roundabout] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
-MEMBER [Measures].[CA Roundabout] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM LOCATION].[STATE].&[CA],
-     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
-MEMBER [Measures].[US Railway] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
-MEMBER [Measures].[CA Railway] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM LOCATION].[STATE].&[CA],
-     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
-MEMBER [Measures].[US Traffic Signal] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
-MEMBER [Measures].[CA Traffic Signal] AS
-    ([Measures].[FACT ACCIDENT Count],
-     [DIM LOCATION].[STATE].&[CA],
-     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+```
 
+> **Ý nghĩa:** Đếm số vụ tai nạn **riêng bang California** xảy ra tại vị trí có **giao lộ** (`Junction = 1`). Tuple có ba thành phần: measure đếm vụ + lọc `STATE = CA` + lọc `JUNCTION = True`. Đặt cạnh Member 1 trên COLUMNS cho phép so sánh xu hướng Junction của California với cả nước theo từng năm.
+
+
+---
+
+**Member 3 — US Roundabout**
+
+```
+Name:       US Roundabout
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **toàn quốc** xảy ra tại **vòng xoay** (`Roundabout = 1`). Không lọc State nên tổng hợp toàn bộ các bang. Roundabout có số vụ rất nhỏ; tạo member riêng giúp nhìn thấy con số thực thay vì viết điều kiện lọc thủ công mỗi lần.
+
+
+---
+
+**Member 4 — CA Roundabout**
+
+```
+Name:       CA Roundabout
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **riêng bang California** xảy ra tại **vòng xoay** (`Roundabout = 1`). Kết hợp ba lọc: measure + STATE = CA + ROUNDABOUT = True. Dùng để so sánh với Member 3 xem California chiếm bao nhiêu phần trăm vụ Roundabout toàn quốc.
+
+
+---
+
+**Member 5 — US Railway**
+
+```
+Name:       US Railway
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **toàn quốc** xảy ra gần **đường sắt** (`Railway = 1`). Không lọc State nên là tổng cả nước. Tạo member này để theo dõi xu hướng tai nạn gần hạ tầng đường sắt qua các năm mà không cần viết lại điều kiện lọc.
+
+
+---
+
+**Member 6 — CA Railway**
+
+```
+Name:       CA Railway
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **riêng bang California** xảy ra gần **đường sắt** (`Railway = 1`). Ba thành phần trong tuple: measure + STATE = CA + RAILWAY = True. Đặt cạnh Member 5 trên COLUMNS để so sánh xu hướng Railway của California với toàn quốc.
+
+
+---
+
+**Member 7 — US Traffic Signal**
+
+```
+Name:       US Traffic Signal
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **toàn quốc** xảy ra tại vị trí có **đèn giao thông** (`Traffic_Signal = 1`). Chiều lọc lấy từ `DIM TRAFFIC SIGNAL` (dimension riêng) thay vì `DIM ROAD STRUCTURE`. Không lọc State — member này cho thấy đèn giao thông có số vụ cao nhất trong bốn loại của câu a.
+
+
+---
+
+**Member 8 — CA Traffic Signal**
+
+```
+Name:       CA Traffic Signal
+Expression:
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+```
+
+> **Ý nghĩa:** Đếm số vụ tai nạn **riêng bang California** xảy ra tại vị trí có **đèn giao thông** (`Traffic_Signal = 1`). Tuple: measure + STATE = CA + TRAFFIC SIGNAL = True. Kết hợp với Member 7 trên cùng câu SELECT để thấy California chiếm tỷ trọng thế nào trong tổng vụ Traffic Signal toàn quốc.
+
+> **Lưu ý về `&[True]`:** ký tự `&` chỉ định key thay vì caption. Các cột cờ BIT trong nguồn được SSAS map thành member key `True`/`False`; vì vậy `&[True]` tương đương lọc giá trị nguồn bằng 1. Các member US không có State tuple nên áp dụng cho toàn quốc; các member CA thêm `[DIM LOCATION].[STATE].&[CA]` để drill-down vào bang California.
+
+**Chụp và chèn ngay tại đây:** chụp tab Calculations sau khi tạo xong tám member, thấy danh sách đầy đủ trong Script Organizer bên trái. Chú thích **Hình 3.10.16. Tám Calculated Member đã tạo trong tab Calculations**.
+
+---
+
+#### Bước 3 - Deploy cube
+
+Nhấn **Ctrl + S** để lưu file cube, sau đó vào menu **Build → Deploy `SSAS`** (hoặc nhấn **F5**). Chờ cửa sổ **Deployment Progress** báo `Deployment completed successfully`.
+
+**Chụp và chèn ngay tại đây:** chụp cửa sổ Deployment Progress báo thành công. Chú thích **Hình 3.10.17. Deploy cube thành công sau khi thêm Calculated Member**.
+
+---
+
+#### Bước 4 - Chạy truy vấn SELECT trong SSMS
+
+Sau khi deploy, tám Calculated Member đã tồn tại vĩnh viễn trong cube. Câu `SELECT` trong SSMS không cần `WITH` nữa — chỉ cần gọi thẳng tên measure.
+
+Mở SSMS, kết nối kiểu **Analysis Services** tới instance SSAS của nhóm, chọn database `SSAS` và mở **New MDX Query**. Dán truy vấn sau và lưu vào `SSAS/MDX_a/a.mdx`:
+
+```mdx
 SELECT
 {
     [Measures].[US Junction],
@@ -159,17 +274,17 @@ NONEMPTY(
     [Measures].[FACT ACCIDENT Count]
 ) ON ROWS
 FROM [US Accidents DW];
-~~~
+```
 
-Tên member <code>&amp;[True]</code> phản ánh key BIT sau khi SSAS đưa vào dimension. Dòng US không có State tuple nên dùng toàn bộ bang; dòng CA thêm member State California. NONEMPTY chỉ trả năm có dữ liệu và YEAR là trục hàng để kết quả tăng dần theo key năm.
+**Chụp và chèn ngay sau khi dán truy vấn:** chụp editor thấy rõ câu SELECT; chú thích **Hình 3.10.18. Truy vấn MDX câu a trong SSMS**.
 
-**Bước 1 - Mở cửa sổ truy vấn.** Trong SSMS, kết nối kiểu Analysis Services tới instance SSAS của nhóm, chọn database SSAS và mở **New MDX Query**. Dán nội dung truy vấn từ <code>SSAS/MDX_a/a.mdx</code>.
+---
 
-**Chụp và chèn ngay sau khi dán truy vấn:** chụp editor có thể đọc được phần khai báo measure và SELECT; chú thích **Hình 3.10.15. Truy vấn MDX câu a**.
+#### Bước 5 - Thực thi và đối chiếu
 
-**Bước 2 - Thực thi và đối chiếu.** Nhấn **Execute/F5**. Kiểm tra kết quả có các năm và đủ tám cột so sánh (bốn điều kiện × Toàn quốc/California).
+Nhấn **Execute** (hoặc **F5**). Kiểm tra kết quả có các năm theo hàng và đủ tám cột so sánh (bốn điều kiện × Toàn quốc/California). Đối chiếu số liệu với kết quả Cube Browser và PivotTable ở các mục trên — ba phương pháp phải cho kết quả khớp nhau.
 
-**Chụp và chèn ngay sau khi chạy:** chụp bảng kết quả; chú thích **Hình 3.10.16. Kết quả MDX câu a**. Nếu màn hình không đủ rộng, dùng hai ảnh thay vì thu nhỏ chữ đến mức khó đọc.
+**Chụp và chèn ngay sau khi chạy:** chụp bảng kết quả; chú thích **Hình 3.10.19. Kết quả MDX câu a**. Nếu màn hình không đủ rộng, dùng hai ảnh thay vì thu nhỏ chữ đến mức khó đọc.
 
 ### 4. Kết quả và nhận xét
 
@@ -250,6 +365,10 @@ Năm 2023 có số đếm thấp hơn rõ rệt ở cả bốn điều kiện; c
 | 3.10.1–3.10.9 | Cube Browser: chuẩn bị và 4 điều kiện × Toàn quốc/California | Chèn ngay sau từng bước manual |
 | 3.10.10 | Excel đã kết nối với cube | Chèn sau bước kết nối |
 | 3.10.11–3.10.14 | Excel: bốn sheet, mỗi sheet có PivotTable Toàn quốc và California | Chèn sau khi hoàn thành từng sheet |
-| 3.10.15–3.10.16 | Editor MDX và bảng kết quả MDX | Chèn sau khi dán truy vấn và sau khi chạy |
+| 3.10.15 | Tab Calculations trong Cube Designer | Chèn sau Bước 1 |
+| 3.10.16 | Tám Calculated Member đã tạo trong tab Calculations | Chèn sau Bước 2 |
+| 3.10.17 | Deploy cube thành công | Chèn sau Bước 3 |
+| 3.10.18 | Truy vấn MDX câu a trong SSMS | Chèn sau Bước 4 |
+| 3.10.19 | Kết quả MDX câu a | Chèn sau Bước 5 |
 
 > Trước khi nộp, thay tất cả vị trí ảnh minh họa bằng screenshot thật và kiểm tra tên database/cube, filter, tiêu đề, số liệu. Nếu báo cáo chính dùng cách đánh số hình khác, tiếp tục số hình của chương đó thay vì giữ số 3.10.x.

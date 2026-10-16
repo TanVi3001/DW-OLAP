@@ -1,0 +1,59 @@
+# Danh sách hình ?nh c?n ch?p cho Tutorial Câu B
+
+T?t c? các hình ?nh c?n du?c luu vào thu m?c images\ v?i tên file chính xác.
+
+## PHUONG PHÁP 1: Browser trong Visual Studio (10 hình)
+
+1. b_step1_open_browser.png - Tab Browser trong Cube Designer
+2. b_step2_reconnect.png - Toolbar v?i nút Reconnect
+3. b_step3_drag_measure.png - Kéo FACT ACCIDENT Count vào Data
+4. b_step3_drag_city_state.png - Kéo CITY và STATE vào Rows
+5. b_step3_filter_severity.png - Dialog filter Severity = 4
+6. b_step3_filter_quarter.png - Dialog filter Q2 2021
+7. b_step3_result_filtered.png - K?t qu? sau khi filter
+8. b_step4_sort_descending.png - Menu Sort Descending
+9. b_step4_result_sorted.png - K?t qu? sau khi sort
+10. b_step5_copy_result.png - Menu Copy result
+
+## PHUONG PHÁP 2: PivotTable trong Excel (8 hình)
+
+11. b_step2_1_excel_connect.png - Dialog Connect to Analysis Services
+12. b_step2_1_select_cube.png - Ch?n database và cube
+13. b_step2_2_pivottable_fields.png - Panel PivotTable Fields
+14. b_step2_2_filter_severity.png - Filter Severity trong Excel
+15. b_step2_2_filter_year_quarter.png - Filter Year/Quarter
+16. b_step2_3_sort_pivottable.png - Menu Sort trong PivotTable
+17. b_step2_3_result_sorted.png - PivotTable dã sort
+18. b_step2_4_export_result.png - Copy t? PivotTable
+
+## PHUONG PHÁP 3: MDX trong SSMS (11 hình)
+
+19. b_step3_1_connect_ssms.png - Connect to Analysis Services
+20. b_step3_1_new_mdx_query.png - Menu New MDX Query
+21. b_step3_2_mdx_basic.png - Truy v?n MDX co b?n
+22. b_step3_2_result_basic.png - K?t qu? MDX co b?n
+23. b_step3_2_mdx_topcount.png - Truy v?n v?i TOPCOUNT
+24. b_step3_2_mdx_filter.png - Truy v?n v?i FILTER
+25. b_step3_2_result_filter.png - K?t qu? FILTER
+26. b_step3_3_execute.png - Nút Execute
+27. b_step3_3_final_result.png - K?t qu? cu?i cùng
+28. b_step3_4_crossjoin.png - Truy v?n CROSSJOIN
+29. b_step3_4_result_crossjoin.png - K?t qu? CROSSJOIN
+
+## PHUONG PHÁP 4: SQL (2 hình)
+
+30. b_step4_sql_query.png - SQL query v?i CTE
+31. b_step4_sql_result.png - K?t qu? SQL
+
+## K?T QU? T?NG H?P (1 hình)
+
+32. b_result_final_example.png - B?ng k?t qu? cu?i cùng
+
+---
+T?ng c?ng: 32 hình ?nh
+
+Luu ý:
+- Format: PNG ho?c JPG
+- Tên file ph?i chính xác
+- Ð?m b?o text trong ?nh d?c du?c rõ
+- Có th? dùng d? li?u m?u ho?c mockup n?u chua có d? li?u th?c

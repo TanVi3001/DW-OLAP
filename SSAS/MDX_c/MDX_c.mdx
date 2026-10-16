@@ -1,0 +1,12 @@
+--QUERY 3--
+//Liệt kê các thành phố ở Texas (State = 'TX') có trên 1.000 vụ tai nạn, kèm số vụ và Distance trung bình; sắp xếp số vụ giảm dần.
+SELECT 
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[Average_Distance]
+    } ON COLUMNS,
+    [TX_Cities_Over_1000] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM LOCATION].[STATE].&[TX]
+);

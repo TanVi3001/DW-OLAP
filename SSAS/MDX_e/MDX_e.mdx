@@ -1,0 +1,23 @@
+-- Câu e: Thống kê số vụ ban ngày và ban đêm theo tháng, roll-up lên quý và năm, phân biệt ngày thường và cuối tuần
+SELECT 
+    CROSSJOIN(
+        {
+            [FACT ACCIDENT].[SUNRISE SUNSET].[Day],
+            [FACT ACCIDENT].[SUNRISE SUNSET].[Night],
+            [FACT ACCIDENT].[SUNRISE SUNSET].[All]
+        },
+        {[Measures].[FACT ACCIDENT Count]}
+    ) ON COLUMNS,
+    NON EMPTY CROSSJOIN(
+        HIERARCHIZE(
+            {
+                [ID START DATE].[Hierarchy].[YEAR].Members,
+                [ID START DATE].[Hierarchy].[QUARTER].Members,
+                [ID START DATE].[Hierarchy].[MONTH].Members
+            }
+        ),
+        [ID START DATE].[IS WEEKEND].[IS WEEKEND].Members
+    ) ON ROWS
+FROM [US Accidents DW];
+
+

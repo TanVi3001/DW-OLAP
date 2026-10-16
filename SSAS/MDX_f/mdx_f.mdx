@@ -1,0 +1,17 @@
+-- Câu f: Liệt kê Top 5 cặp đường và thành phố tại California có số vụ tai nạn ban đêm tại nơi có đèn giao thông cao nhất
+SELECT 
+    {[Measures].[FACT ACCIDENT Count]} ON COLUMNS,
+    ORDER(
+        NONEMPTY(
+            [Top5_CA_Street_City_Night_Signal] * [DIM LOCATION].[CITY].[CITY].Members,
+            [Measures].[FACT ACCIDENT Count]
+        ),
+        [Measures].[FACT ACCIDENT Count],
+        BDESC
+    ) ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM LOCATION].[STATE].&[CA],
+    [FACT ACCIDENT].[SUNRISE SUNSET].&[Night],
+    [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True]
+);
