@@ -1,0 +1,9 @@
+-- Cho biết thành phố có nhiều vụ tai nạn severity 4 nhất trong năm 2021--
+SELECT
+    [Measures].[FACT ACCIDENT Count] ON COLUMNS,
+    [Top_City_Severity4_Year2021] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM SEVERITY].[ID SEVERITY].&[4],
+    [ID START DATE].[YEAR].&[2021]
+);
