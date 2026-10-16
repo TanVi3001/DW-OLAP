@@ -1,0 +1,16 @@
+-- Câu g: Thống kê số vụ, YoY%, tỷ lệ severity 3-4 và tỷ lệ ban đêm theo từng quý và rollup theo năm (2019 - 2022)
+SELECT 
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[YoY_Growth_Rate],
+        [Measures].[Severity_3_4_Rate],
+        [Measures].[Night_Accident_Rate]
+    } ON COLUMNS,
+    NON EMPTY HIERARCHIZE(
+        Descendants(
+            {[ID START DATE].[Hierarchy].[2019]:[ID START DATE].[Hierarchy].[2022]},
+            [ID START DATE].[Hierarchy].[QUARTER],
+            SELF_AND_BEFORE
+        )
+    ) ON ROWS
+FROM [US Accidents DW];
