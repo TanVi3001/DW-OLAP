@@ -1,0 +1,14 @@
+# Local dataset / source papers
+Accidents_500.csv
+*.pdf
+
+# Generated runs and Kaggle exports
+outputs/
+
+# Local notebook and Python artifacts
+.ipynb_checkpoints/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
