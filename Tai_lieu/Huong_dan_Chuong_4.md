@@ -49,8 +49,8 @@ VS Code chỉ dùng để đọc và chỉnh sửa file tài liệu. Các màn h
 | Cube | `D:\OLAP\Pro\SSAS\SSAS\US Accidents DW.cube` |
 | Data Source | `D:\OLAP\Pro\SSAS\SSAS\US Accidents DW.ds` |
 | Data Source View | `D:\OLAP\Pro\SSAS\SSAS\US Accidents DW.dsv` |
-| MDX câu a | `D:\OLAP\Pro\SSAS\MDX_a\a.mdx` |
-| MDX câu b, e, f | `D:\OLAP\Pro\SSAS\MDX_b_e_f\` |
+| MDX câu a | `D:\OLAP\Pro\SSAS\MDX\Query_US_Accident.mdx` |
+| MDX câu b, e, f | `D:\OLAP\Pro\SSAS\MDX\ (b_cap_nhat, e_cap_nhat, f1_cap_nhat, f2_cap_nhat)` |
 | Excel câu a | `D:\OLAP\Pro\Pivot_Excel\Pivot_a.xlsx` |
 | Excel câu b | `D:\OLAP\Pro\Pivot_Excel\Pivot_b.xlsx` |
 | Excel câu e | `D:\OLAP\Pro\Pivot_Excel\Pivot_e.xlsx` |
@@ -481,7 +481,7 @@ MDX được dùng để kiểm tra kết quả Cube Browser, đối chiếu v�
 2. Kết nối đến Analysis Services.
 3. Chọn database `SSAS`.
 4. Chọn cube `US Accidents DW`.
-5. Mở các file MDX trong `D:\OLAP\Pro\SSAS\MDX_a\` và `D:\OLAP\Pro\SSAS\MDX_b_e_f\`.
+5. Mở các file MDX trong `D:\OLAP\Pro\SSAS\MDX\` và `D:\OLAP\Pro\SSAS\MDX\ (b_cap_nhat, e_cap_nhat, f1_cap_nhat, f2_cap_nhat)`.
 6. Chạy truy vấn.
 7. So sánh với Cube Browser và Excel.
 
@@ -607,7 +607,7 @@ Tuy nhiên, kết quả chỉ thể hiện mối liên hệ thống kê, không 
 - `D:\OLAP\Pro\Tai_lieu\Huong_dan_cau_f_Top5.md`
 - `D:\OLAP\Pro\Tai_lieu\ngu_canh_va_bo_cau_hoi_nghiep_vu.md`
 - `D:\OLAP\Pro\Pivot_Excel\README.md`
-- `D:\OLAP\Pro\SSAS\MDX_a\a.mdx`
-- `D:\OLAP\Pro\SSAS\MDX_b_e_f\`
+- `D:\OLAP\Pro\SSAS\MDX\Query_US_Accident.mdx`
+- `D:\OLAP\Pro\SSAS\MDX\ (b_cap_nhat, e_cap_nhat, f1_cap_nhat, f2_cap_nhat)`
 
 > Trước khi nộp báo cáo, thay toàn bộ vị trí ảnh bằng screenshot thật, kiểm tra lại tên database/cube, filter, tiêu đề, số liệu và số thứ tự hình.

@@ -108,7 +108,7 @@ Sau mỗi sheet, nếu Excel sắp xếp năm giảm dần, nhấp phải năm �
 
 Thay vì dùng `WITH` để khai báo measure tạm thời trong từng câu query, mục này hướng dẫn **tạo Calculated Member trực tiếp trong Visual Studio** (lưu vĩnh viễn vào cube). Sau khi deploy, câu `SELECT` trong SSMS trở nên ngắn gọn và ai cũng dùng lại được mà không cần khai báo lại.
 
-Lưu truy vấn cuối cùng trong project tại `SSAS/MDX_a/a.mdx`.
+Lưu truy vấn cuối cùng trong project tại `SSAS/MDX/Query_US_Accident.mdx (QUERY A)`.
 
 ---
 
@@ -255,7 +255,7 @@ Nhấn **Ctrl + S** để lưu file cube, sau đó vào menu **Build → Deploy 
 
 Sau khi deploy, tám Calculated Member đã tồn tại vĩnh viễn trong cube. Câu `SELECT` trong SSMS không cần `WITH` nữa — chỉ cần gọi thẳng tên measure.
 
-Mở SSMS, kết nối kiểu **Analysis Services** tới instance SSAS của nhóm, chọn database `SSAS` và mở **New MDX Query**. Dán truy vấn sau và lưu vào `SSAS/MDX_a/a.mdx`:
+Mở SSMS, kết nối kiểu **Analysis Services** tới instance SSAS của nhóm, chọn database `SSAS` và mở **New MDX Query**. Dán truy vấn sau và lưu vào `SSAS/MDX/Query_US_Accident.mdx (QUERY A)`:
 
 ```mdx
 SELECT
