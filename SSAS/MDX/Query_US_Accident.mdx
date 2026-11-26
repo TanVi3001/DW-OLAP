@@ -1,0 +1,574 @@
+﻿-- ============================================================
+-- FILE: query_us_mdx.mdx
+-- Tổng hợp tất cả câu truy vấn MDX - US Accidents DW
+-- Nguồn: drive-download-20261031T171226Z-1-001
+-- ============================================================
+
+
+-- ============================================================
+-- QUERY A (a.mdx)
+-- So sánh số vụ tai nạn tại các công trình đường bộ (Junction,
+-- Roundabout, Railway, Traffic Signal) giữa toàn US và bang CA
+-- theo từng năm
+-- ============================================================
+
+WITH
+MEMBER [Measures].[US Junction] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[JUNCTION].&[True])
+MEMBER [Measures].[CA Junction] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[JUNCTION].&[True])
+MEMBER [Measures].[US Roundabout] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+MEMBER [Measures].[CA Roundabout] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[ROUNDABOUT].&[True])
+MEMBER [Measures].[US Railway] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+MEMBER [Measures].[CA Railway] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM ROAD STRUCTURE].[RAILWAY].&[True])
+MEMBER [Measures].[US Traffic Signal] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+MEMBER [Measures].[CA Traffic Signal] AS
+    ([Measures].[FACT ACCIDENT Count],
+     [DIM LOCATION].[STATE].&[CA],
+     [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True])
+
+SELECT
+{
+    [Measures].[US Junction],
+    [Measures].[CA Junction],
+    [Measures].[US Roundabout],
+    [Measures].[CA Roundabout],
+    [Measures].[US Railway],
+    [Measures].[CA Railway],
+    [Measures].[US Traffic Signal],
+    [Measures].[CA Traffic Signal]
+} ON COLUMNS,
+[ID START DATE].[YEAR].MEMBERS ON ROWS
+FROM [US Accidents DW];
+
+
+-- ============================================================
+-- QUERY B (b.mdx)
+-- Cho biết thành phố có nhiều vụ tai nạn severity 4 nhất
+-- trong năm 2021
+-- ============================================================
+
+SELECT
+    [Measures].[FACT ACCIDENT Count] ON COLUMNS,
+    [Top_City_Severity4_Year2021] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM SEVERITY].[ID SEVERITY].&[4],
+    [ID START DATE].[YEAR].&[2021]
+);
+
+
+-- ============================================================
+-- QUERY C (MDX_c.mdx)
+-- Liệt kê các thành phố ở Texas (State = 'TX') có trên 1.000
+-- vụ tai nạn, kèm số vụ và Distance trung bình;
+-- sắp xếp số vụ giảm dần
+-- ============================================================
+
+SELECT
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[Average_Distance]
+    } ON COLUMNS,
+    [TX_Cities_Over_1000] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM LOCATION].[STATE].&[TX]
+);
+
+
+-- ============================================================
+-- QUERY D (mdx_d.mdx)
+-- Với mỗi bang, tính tỷ lệ vụ tai nạn trong điều kiện sương mù
+-- (Weather_Condition chứa "Fog") trên tổng số vụ của bang
+-- trong năm 2022. Chỉ hiện thị bang có tỷ lệ trên 5%,
+-- sắp xếp tỷ lệ giảm dần
+-- ============================================================
+
+SELECT
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[Fog_Accident_Rate]
+    } ON COLUMNS,
+    [States_Fog_Rate_Over_5Pct] ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [ID START DATE].[YEAR].&[2022]
+);
+
+
+-- ============================================================
+-- QUERY E (MDX_e.mdx)
+-- Thống kê số vụ ban ngày và ban đêm theo tháng, roll-up lên
+-- quý và năm, phân biệt ngày thường và cuối tuần
+-- ============================================================
+
+SELECT
+    CROSSJOIN(
+        {
+            [FACT ACCIDENT].[SUNRISE SUNSET].[Day],
+            [FACT ACCIDENT].[SUNRISE SUNSET].[Night],
+            [FACT ACCIDENT].[SUNRISE SUNSET].[All]
+        },
+        {[Measures].[FACT ACCIDENT Count]}
+    ) ON COLUMNS,
+    NON EMPTY CROSSJOIN(
+        HIERARCHIZE(
+            {
+                [ID START DATE].[Hierarchy].[YEAR].Members,
+                [ID START DATE].[Hierarchy].[QUARTER].Members,
+                [ID START DATE].[Hierarchy].[MONTH].Members
+            }
+        ),
+        [ID START DATE].[IS WEEKEND].[IS WEEKEND].Members
+    ) ON ROWS
+FROM [US Accidents DW];
+
+
+-- ============================================================
+-- QUERY F (mdx_f.mdx)
+-- Liệt kê Top 5 cặp đường và thành phố tại California có số
+-- vụ tai nạn ban đêm tại nơi có đèn giao thông cao nhất
+-- ============================================================
+
+SELECT
+    {[Measures].[FACT ACCIDENT Count]} ON COLUMNS,
+    ORDER(
+        NONEMPTY(
+            [Top5_CA_Street_City_Night_Signal] * [DIM LOCATION].[CITY].[CITY].Members,
+            [Measures].[FACT ACCIDENT Count]
+        ),
+        [Measures].[FACT ACCIDENT Count],
+        BDESC
+    ) ON ROWS
+FROM [US Accidents DW]
+WHERE (
+    [DIM LOCATION].[STATE].&[CA],
+    [FACT ACCIDENT].[SUNRISE SUNSET].&[Night],
+    [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True]
+);
+
+
+-- ============================================================
+-- QUERY G (mdx_g.mdx)
+-- Thống kê số vụ, YoY%, tỷ lệ severity 3-4 và tỷ lệ ban đêm
+-- theo từng quý và rollup theo năm (2019 - 2022)
+-- ============================================================
+
+SELECT
+    {
+        [Measures].[FACT ACCIDENT Count],
+        [Measures].[YoY_Growth_Rate],
+        [Measures].[Severity_3_4_Rate],
+        [Measures].[Night_Accident_Rate]
+    } ON COLUMNS,
+    NON EMPTY HIERARCHIZE(
+        Descendants(
+            {[ID START DATE].[Hierarchy].[2019]:[ID START DATE].[Hierarchy].[2022]},
+            [ID START DATE].[Hierarchy].[QUARTER],
+            SELF_AND_BEFORE
+        )
+    ) ON ROWS
+FROM [US Accidents DW];
+
+
+-- ============================================================
+-- QUERY 8a (Query_US_Accident.mdx - câu 8, phần 1)
+-- Top 5 bang có tổng Distance tai nạn lớn nhất năm 2021
+-- kèm số vụ và Distance trung bình
+-- ============================================================
+
+WITH
+  MEMBER [Measures].[AVG DISTANCE] AS
+    IIF(
+      [Measures].[FACT ACCIDENT Count] = 0,
+      NULL,
+      [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]
+    )
+SELECT
+  {
+    [Measures].[DISTANCE],
+    [Measures].[FACT ACCIDENT Count],
+    [Measures].[AVG DISTANCE]
+  } ON COLUMNS,
+  TOPCOUNT(
+    [DIM LOCATION].[STATE].[STATE].MEMBERS,
+    5,
+    [Measures].[DISTANCE]
+  ) ON ROWS
+FROM [US Accidents DW]
+WHERE ([ID START DATE].[YEAR].&[2021])
+
+
+-- ============================================================
+-- QUERY 8b (Query_US_Accident.mdx - câu 8, phần 2)
+-- Top 3 thành phố tại California có tổng Distance lớn nhất
+-- năm 2021
+-- ============================================================
+
+WITH
+  MEMBER [Measures].[AVG DISTANCE] AS
+    IIF(
+      [Measures].[FACT ACCIDENT Count] = 0,
+      NULL,
+      [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]
+    )
+SELECT
+  {
+    [Measures].[DISTANCE],
+    [Measures].[FACT ACCIDENT Count],
+    [Measures].[AVG DISTANCE]
+  } ON COLUMNS,
+  TOPCOUNT(
+    EXISTS(
+      [DIM LOCATION].[CITY].[CITY].MEMBERS,
+      {[DIM LOCATION].[STATE].&[CA]},
+      "FACT ACCIDENT"
+    ),
+    3,
+    [Measures].[DISTANCE]
+  ) ON ROWS
+FROM [US Accidents DW]
+WHERE ([ID START DATE].[YEAR].&[2021])
+
+
+-- ============================================================
+-- QUERY 9 (Query_US_Accident.mdx - câu 9)
+-- Số vụ, tỷ lệ, tổng Distance và tầm nhìn trung bình
+-- phân loại theo mức độ nghiêm trọng (Severity); có thêm dòng ALL
+-- ============================================================
+
+WITH
+ MEMBER [Measures].[AVG VISIBILITY] AS
+   IIF(
+     [Measures].[FACT ACCIDENT Count] = 0,
+     NULL,
+     [Measures].[VISIBILITY] / [Measures].[FACT ACCIDENT Count]
+   ), FORMAT_STRING = "#,##0.00"
+ MEMBER [Measures].[ACCIDENT RATIO] AS
+   IIF(
+     ([DIM SEVERITY].[SEVERITY DESC].[ALL], [Measures].[FACT ACCIDENT Count]) = 0,
+     NULL,
+     [Measures].[FACT ACCIDENT Count] / ([DIM SEVERITY].[SEVERITY DESC].[ALL], [Measures].[FACT ACCIDENT Count])
+   ), FORMAT_STRING = "0.00%"
+SELECT
+ {
+   [Measures].[FACT ACCIDENT Count],
+   [Measures].[ACCIDENT RATIO],
+   [Measures].[DISTANCE],
+   [Measures].[AVG VISIBILITY]
+ } ON COLUMNS,
+ UNION(
+   ORDER(
+     [DIM SEVERITY].[SEVERITY DESC].[SEVERITY DESC].MEMBERS,
+     [Measures].[FACT ACCIDENT Count],
+     BDESC
+   ),
+   { [DIM SEVERITY].[SEVERITY DESC].[ALL] }
+ ) ON ROWS
+FROM [US Accidents DW]
+
+
+-- ============================================================
+-- QUERY 10 (Query_US_Accident.mdx - câu 10)
+-- Các bang có số vụ cực đại / cực tiểu: số vụ, Distance,
+-- tỷ lệ Severity 3-4, nhiệt độ / độ ẩm / áp suất trung bình
+-- ============================================================
+
+WITH
+ MEMBER [Measures].[AVG TEMP] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[TEMPERATURE] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.0"
+ MEMBER [Measures].[AVG HUMIDITY] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[HUMIDITY] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.0"
+ MEMBER [Measures].[AVG PRESSURE] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[PRESSURE] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.00"
+ MEMBER [Measures].[SEV 3_4 COUNT] AS
+   Aggregate(
+     { [DIM SEVERITY].[ID SEVERITY].&[3], [DIM SEVERITY].[ID SEVERITY].&[4] },
+     [Measures].[FACT ACCIDENT Count]
+   )
+ MEMBER [Measures].[SEV 3_4 RATIO] AS
+   IIF(
+     [Measures].[FACT ACCIDENT Count] = 0,
+     NULL,
+     [Measures].[SEV 3_4 COUNT] / [Measures].[FACT ACCIDENT Count]
+   ), FORMAT_STRING = "0.00%"
+ SET [StatesWithData] AS
+   NONEMPTY([DIM LOCATION].[STATE].[STATE].MEMBERS, [Measures].[FACT ACCIDENT Count])
+ MEMBER [Measures].[MAX_ACC] AS
+   MAX([StatesWithData], [Measures].[FACT ACCIDENT Count])
+ MEMBER [Measures].[MIN_ACC] AS
+   MIN([StatesWithData], [Measures].[FACT ACCIDENT Count])
+SELECT
+ {
+   [Measures].[FACT ACCIDENT Count],
+   [Measures].[DISTANCE],
+   [Measures].[SEV 3_4 RATIO],
+   [Measures].[AVG TEMP],
+   [Measures].[AVG HUMIDITY],
+   [Measures].[AVG PRESSURE]
+ } ON COLUMNS,
+ ORDER([ExtremesStates], [Measures].[FACT ACCIDENT Count], BDESC) ON ROWS
+FROM [US Accidents DW]
+
+
+-- ============================================================
+-- QUERY 11 (Query_US_Accident.mdx - câu 11)
+-- Số vụ, tầm nhìn trung bình và tốc độ gió trung bình
+-- theo cặp County - City tại California, sắp xếp giảm dần
+-- ============================================================
+
+WITH
+ MEMBER [Measures].[AVG VISIBILITY] AS
+   IIF(
+     [Measures].[FACT ACCIDENT Count] = 0,
+     NULL,
+     [Measures].[VISIBILITY] / [Measures].[FACT ACCIDENT Count]
+   ), FORMAT_STRING = "#,##0.00"
+ MEMBER [Measures].[AVG WIND SPEED] AS
+   IIF(
+     [Measures].[FACT ACCIDENT Count] = 0,
+     NULL,
+     [Measures].[WIND SPEED] / [Measures].[FACT ACCIDENT Count]
+   ), FORMAT_STRING = "#,##0.0"
+SELECT
+ {
+   [Measures].[FACT ACCIDENT Count],
+   [Measures].[AVG VISIBILITY],
+   [Measures].[AVG WIND SPEED]
+ } ON COLUMNS,
+ ORDER(
+   NONEMPTY(
+     [DIM LOCATION].[COUNTY].[COUNTY].MEMBERS *
+     [DIM LOCATION].[CITY].[CITY].MEMBERS,
+     [Measures].[FACT ACCIDENT Count]
+   ),
+   [Measures].[FACT ACCIDENT Count],
+   BDESC
+ ) ON ROWS
+FROM [US Accidents DW]
+WHERE ([DIM LOCATION].[STATE].&[CA])
+
+
+-- ============================================================
+-- QUERY 12 (Query_US_Accident.mdx - câu 12)
+-- Số vụ, nhiệt độ / lượng mưa / Distance trung bình
+-- theo cặp (Weather Condition × Wind Direction) hợp lệ
+-- ============================================================
+
+WITH
+ MEMBER [Measures].[AVG TEMP] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[TEMPERATURE] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.0"
+ MEMBER [Measures].[AVG PRECIPITATION] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[PRECIPITATION] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.000"
+ MEMBER [Measures].[AVG DISTANCE] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.00"
+ SET [ValidWeather] AS
+   FILTER(
+     [DIM WEATHER].[WEATHER CONDITION].[WEATHER CONDITION].MEMBERS,
+     [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> ""
+     AND [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> "Unknown"
+     AND [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> "N/A"
+   )
+ SET [ValidWind] AS
+   FILTER(
+     [DIM WEATHER].[WIND DIRECTION].[WIND DIRECTION].MEMBERS,
+     [DIM WEATHER].[WIND DIRECTION].CURRENTMEMBER.NAME <> ""
+     AND [DIM WEATHER].[WIND DIRECTION].CURRENTMEMBER.NAME <> "Unknown"
+     AND [DIM WEATHER].[WIND DIRECTION].CURRENTMEMBER.NAME <> "N/A"
+   )
+SELECT
+ {
+   [Measures].[FACT ACCIDENT Count],
+   [Measures].[AVG TEMP],
+   [Measures].[AVG PRECIPITATION],
+   [Measures].[AVG DISTANCE]
+ } ON COLUMNS,
+ NONEMPTY(
+   [ValidWeather] * [ValidWind],
+   [Measures].[FACT ACCIDENT Count]
+ ) ON ROWS
+FROM [US Accidents DW]
+
+
+-- ============================================================
+-- QUERY 13 (Query_US_Accident.mdx - câu 13)
+-- Phân tách Junction-only / Signal-only / Cả hai theo năm
+-- kèm tỷ lệ Severity 3-4, Distance và tầm nhìn trung bình
+-- ============================================================
+
+WITH
+  MEMBER [Measures].[JUNCTION ONLY COUNT] AS
+    ([DIM ROAD STRUCTURE].[JUNCTION].&[True], [Measures].[FACT ACCIDENT Count])
+    - ([DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count])
+
+  MEMBER [Measures].[SIGNAL ONLY COUNT] AS
+    ([DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count])
+    - ([DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count])
+
+  MEMBER [Measures].[BOTH COUNT] AS
+    ([DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count])
+
+  MEMBER [Measures].[SEV 3_4 RATIO] AS
+    IIF([Measures].[FACT ACCIDENT Count] = 0, NULL,
+      (([DIM SEVERITY].[ID SEVERITY].&[3], [Measures].[FACT ACCIDENT Count]) +
+       ([DIM SEVERITY].[ID SEVERITY].&[4], [Measures].[FACT ACCIDENT Count]))
+      / [Measures].[FACT ACCIDENT Count]
+    ), FORMAT_STRING = "0.00%"
+
+  MEMBER [Measures].[AVG DISTANCE] AS
+    IIF([Measures].[FACT ACCIDENT Count] = 0, NULL,
+      [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]
+    ), FORMAT_STRING = "#,##0.00"
+
+  MEMBER [Measures].[AVG VISIBILITY] AS
+    IIF([Measures].[FACT ACCIDENT Count] = 0, NULL,
+      [Measures].[VISIBILITY] / [Measures].[FACT ACCIDENT Count]
+    ), FORMAT_STRING = "#,##0.00"
+
+SELECT
+  {
+    [Measures].[JUNCTION ONLY COUNT],
+    [Measures].[SIGNAL ONLY COUNT],
+    [Measures].[BOTH COUNT],
+    [Measures].[SEV 3_4 RATIO],
+    [Measures].[AVG DISTANCE],
+    [Measures].[AVG VISIBILITY]
+  } ON COLUMNS,
+  ORDER(
+    [ID START DATE].[YEAR].[YEAR].MEMBERS,
+    [ID START DATE].[YEAR].CurrentMember.Member_Key, BASC
+  ) ON ROWS
+FROM [US Accidents DW]
+
+
+-- ============================================================
+-- QUERY 14 (Query_US_Accident.mdx - câu 14)
+-- Top 5 điều kiện thời tiết tại New York có nhiều tai nạn nhất
+-- kèm Distance / tầm nhìn trung bình và tỷ lệ ban đêm
+-- ============================================================
+
+WITH
+ MEMBER [Measures].[AVG DISTANCE] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.00"
+ MEMBER [Measures].[AVG VISIBILITY] AS
+   IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[VISIBILITY] / [Measures].[FACT ACCIDENT Count]),
+   FORMAT_STRING = "#,##0.00"
+ MEMBER [Measures].[NIGHT ACCIDENTS] AS
+   ( [FACT ACCIDENT].[SUNRISE SUNSET].&[Night], [Measures].[FACT ACCIDENT Count] )
+ MEMBER [Measures].[NIGHT RATIO] AS
+   IIF(
+     [Measures].[FACT ACCIDENT Count] = 0,
+     NULL,
+     [Measures].[NIGHT ACCIDENTS] / [Measures].[FACT ACCIDENT Count]
+   ), FORMAT_STRING = "0.00%"
+SELECT
+ {
+   [Measures].[FACT ACCIDENT Count],
+   [Measures].[AVG DISTANCE],
+   [Measures].[AVG VISIBILITY],
+   [Measures].[NIGHT RATIO]
+ } ON COLUMNS,
+ TOPCOUNT(
+ FILTER(
+   [DIM WEATHER].[WEATHER CONDITION].[WEATHER CONDITION].MEMBERS,
+   [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> ""
+   AND [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> "Unknown"
+   AND [DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME <> "N/A"
+ ),
+ 5,
+ [Measures].[FACT ACCIDENT Count]
+ ) ON ROWS
+FROM [US Accidents DW]
+WHERE ([DIM LOCATION].[STATE].&[NY])
+
+
+-- ============================================================
+-- QUERY 15 (Query_US_Accident.mdx - câu 15)
+-- Top 5 bang năm 2022: tai nạn thỏa (Junction HOẶC Traffic Signal)
+-- VÀ (thời tiết Rain/Fog) VÀ (Severity 3 hoặc 4)
+-- kèm Distance và tầm nhìn trung bình
+-- ============================================================
+
+WITH
+ -- Số vụ, tổng Distance, tổng Visibility thỏa Junction = True HOẶC Traffic_Signal = True (mỗi vụ tính 1 lần: A + B - A∩B)
+ MEMBER [Measures].[INFRA ACCIDENTS] AS
+   ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [Measures].[FACT ACCIDENT Count] )
+   + ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count] )
+   - ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[FACT ACCIDENT Count] )
+
+ MEMBER [Measures].[INFRA DISTANCE] AS
+   ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [Measures].[DISTANCE] )
+   + ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[DISTANCE] )
+   - ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[DISTANCE] )
+
+ MEMBER [Measures].[INFRA VISIBILITY] AS
+   ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [Measures].[VISIBILITY] )
+   + ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[VISIBILITY] )
+   - ( [DIM ROAD STRUCTURE].[JUNCTION].&[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&[True], [Measures].[VISIBILITY] )
+
+ -- Tập hợp thời tiết chứa Rain hoặc Fog
+ SET [RainOrFog] AS
+   FILTER(
+     [DIM WEATHER].[WEATHER CONDITION].[WEATHER CONDITION].MEMBERS,
+     InStr(UCase([DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME), "RAIN") > 0
+     OR
+     InStr(UCase([DIM WEATHER].[WEATHER CONDITION].CURRENTMEMBER.NAME), "FOG") > 0
+   )
+
+ -- Tập hợp mức độ nghiêm trọng 3 và 4
+ SET [Sev3_4] AS
+   { [DIM SEVERITY].[ID SEVERITY].&[3], [DIM SEVERITY].[ID SEVERITY].&[4] }
+
+ MEMBER [Measures].[FILTERED ACCIDENTS] AS
+   Sum([RainOrFog] * [Sev3_4], [Measures].[INFRA ACCIDENTS])
+
+ MEMBER [Measures].[FILTERED DISTANCE] AS
+   Sum([RainOrFog] * [Sev3_4], [Measures].[INFRA DISTANCE])
+
+ MEMBER [Measures].[FILTERED VISIBILITY] AS
+   Sum([RainOrFog] * [Sev3_4], [Measures].[INFRA VISIBILITY])
+
+ MEMBER [Measures].[AVG DISTANCE] AS
+   IIF([Measures].[FILTERED ACCIDENTS] = 0, NULL, [Measures].[FILTERED DISTANCE] / [Measures].[FILTERED ACCIDENTS]),
+   FORMAT_STRING = "#,##0.00"
+
+ MEMBER [Measures].[AVG VISIBILITY] AS
+   IIF([Measures].[FILTERED ACCIDENTS] = 0, NULL, [Measures].[FILTERED VISIBILITY] / [Measures].[FILTERED ACCIDENTS]),
+   FORMAT_STRING = "#,##0.00"
+
+SELECT
+ {
+   [Measures].[FILTERED ACCIDENTS],
+   [Measures].[AVG DISTANCE],
+   [Measures].[AVG VISIBILITY]
+ } ON COLUMNS,
+ TOPCOUNT(
+   [DIM LOCATION].[STATE].[STATE].MEMBERS,
+   5,
+   [Measures].[FILTERED ACCIDENTS]
+ ) ON ROWS
+FROM [US Accidents DW]
+WHERE ( [ID START DATE].[YEAR].&[2022] )
