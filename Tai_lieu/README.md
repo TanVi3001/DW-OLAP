@@ -6,7 +6,9 @@
 | [Hướng dẫn báo cáo câu a](Huong_dan_bao_cao_cau_a.md) | Cube Browser manual, Pivot Excel, MDX, kết quả và cách chụp/chèn ảnh theo báo cáo mẫu |
 | [Manual và Pivot b, e, f](Huong_dan_manual_b_e_f.md) | Chuẩn bị cube, bộ lọc và bố cục Pivot |
 | [Câu f: Top 5 đường](Huong_dan_cau_f_Top5.md) | Manual Visual Studio trước, Pivot Excel sau, theo câu f đã sửa |
+| [Tutorial câu B](Tutorial_Question_B.md) · [câu C – Texas](Tutorial_Texas_Query.md) · [câu D](Tutorial_Question_D.md) | Hướng dẫn từng bước kèm danh sách ảnh cần chụp |
+| [Bảng phân công](Bao_cao/24520814_24521985_Phan_cong.docx) | Phân công công việc và link drive |
 | [Báo cáo SSIS](Bao_cao/24520814_24521985_SSIS.docx) | Báo cáo Word của nhóm |
 | [Kế hoạch triển khai](Bao_cao/Plan_trien_khai_Chuong_5_US_Accidents.docx) | Kế hoạch triển khai chương 5 |
 
-[Workbook Pivot Excel](../Pivot_Excel/) · [Truy vấn MDX câu a](../SSAS/MDX_a/a.mdx) · [Truy vấn MDX b, e, f](../SSAS/MDX_b_e_f/) · [Về trang chính](../README.md)
+[Workbook Pivot Excel](../Pivot_Excel/) · [Truy vấn MDX 15 câu](../SSAS/MDX/Query_US_Accident.mdx) · [Truy vấn MDX b, e, f](../SSAS/MDX/) · [Về trang chính](../README.md)

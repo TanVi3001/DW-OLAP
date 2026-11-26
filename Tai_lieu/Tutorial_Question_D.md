@@ -196,7 +196,7 @@ Tạo sheet `Fog_Percentage`.
 
 ## 3. Thực hiện bằng MDX Query
 
-Viết MDX Query sử dụng **Calculated Member** để tính tỷ lệ %. Lưu truy vấn tại `SSAS/MDX_d/Fog_Percentage.mdx`.
+Viết MDX Query sử dụng **Calculated Member** để tính tỷ lệ %. Lưu truy vấn tại `SSAS/MDX/Query_US_Accident.mdx (QUERY D)`.
 
 ### Bước 1: Mở SSMS và kết nối
 
@@ -293,7 +293,7 @@ WHERE
 ### Bước 5: Lưu Query
 
 1. **Ctrl + S** hoặc **File → Save**.
-2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX_d\` (tạo thư mục nếu chưa có).
+2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX\` (tạo thư mục nếu chưa có).
 3. Tên file: `Fog_Percentage.mdx`.
 4. Nhấn **Save**.
 
@@ -518,7 +518,7 @@ Các bang có tỷ lệ tai nạn sương mù > 5% trong năm 2022 (sắp xếp 
 **Files cần tạo:**
 
 - `Pivot_Excel/Pivot_d.xlsx` (3 sheets: Fog_Count, Total_Count, Fog_Percentage)
-- `SSAS/MDX_d/Fog_Percentage.mdx`
+- `SSAS/MDX/Query_US_Accident.mdx (QUERY D)`
 - `Tai_lieu/Bao_cao/Hinh_cau_d/` (15 ảnh)
 
 **Điểm đặc biệt của câu d:**

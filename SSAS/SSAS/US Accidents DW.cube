@@ -905,7 +905,104 @@
       <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
       <Commands>
         <Command>
-          <Text>CALCULATE; 
+          <Text>CALCULATE;     
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG VISBILITY]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[VISIBILITY] / [Measures].[FACT ACCIDENT Count]), 
+VISIBLE = 1;    
+CREATE MEMBER CURRENTCUBE.[Measures].[SEV 3_4 RATIO]
+ AS IIF(
+  IsEmpty([Measures].[FACT ACCIDENT Count]) OR [Measures].[FACT ACCIDENT Count] = 0,
+  NULL,
+  (
+    ([DIM SEVERITY].[ID SEVERITY].&amp;[3], [Measures].[FACT ACCIDENT Count])
+    +
+    ([DIM SEVERITY].[ID SEVERITY].&amp;[4], [Measures].[FACT ACCIDENT Count])
+  )
+  / [Measures].[FACT ACCIDENT Count]
+), 
+FORMAT_STRING = "Percent", 
+VISIBLE = 1;     
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG TEMP]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[TEMPERATURE] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;     
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG PRESSURE]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[PRESSURE] / [Measures].[FACT ACCIDENT Count]), 
+VISIBLE = 1;     
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG HUMIDITY]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[HUMIDITY] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;     
+CREATE MEMBER CURRENTCUBE.[Measures].[PERCENT ACCIDENTS]
+ AS IIF(([DIM SEVERITY].[SEVERITY DESC].[ALL], [Measures].[FACT ACCIDENT Count]) = 0, NULL,
+   [Measures].[FACT ACCIDENT Count] / ([DIM SEVERITY].[SEVERITY DESC].[ALL], [Measures].[FACT ACCIDENT Count])), 
+FORMAT_STRING = "Percent", 
+VISIBLE = 1;      
+CREATE DYNAMIC SET CURRENTCUBE.[ExtremesStates]
+ AS FILTER(
+ NONEMPTY([DIM LOCATION].[STATE].[STATE].MEMBERS, [Measures].[FACT ACCIDENT Count]),
+ [Measures].[FACT ACCIDENT Count] = MAX([DIM LOCATION].[STATE].[STATE].MEMBERS, [Measures].[FACT ACCIDENT Count])
+ OR
+ [Measures].[FACT ACCIDENT Count] = MIN(NONEMPTY([DIM LOCATION].[STATE].[STATE].MEMBERS, [Measures].[FACT ACCIDENT Count]), [Measures].[FACT ACCIDENT Count])
+);      
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG WIND SPEED]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[WIND SPEED] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG PRECIPITATION]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[PRECIPITATION] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[SEV 4 COUNT]
+ AS ( [DIM SEVERITY].[ID SEVERITY].&amp;[4], [Measures].[FACT ACCIDENT Count] ), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;     
+CREATE MEMBER CURRENTCUBE.[Measures].[AVG DISTANCE]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[DISTANCE] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[NIGHT ACCIDENTS]
+ AS ( [FACT ACCIDENT].[SUNRISE SUNSET].&amp;[Night], [Measures].[FACT ACCIDENT Count] ), 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[NIGHT RATIO]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[NIGHT ACCIDENTS] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Percent", 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[INFRA ACCIDENTS]
+ AS ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [Measures].[FACT ACCIDENT Count] )
++ ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] )
+- ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] ), 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[INFRA DISTANCE]
+ AS ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [Measures].[DISTANCE] )
++ ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[DISTANCE] )
+- ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[DISTANCE] ), 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[INFRA VISIBILITY]
+ AS ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [Measures].[VISIBILITY] )
++ ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[VISIBILITY] )
+- ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[VISIBILITY] ), 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[INFRA AVG DISTANCE]
+ AS IIF([Measures].[INFRA ACCIDENTS] = 0, NULL, [Measures].[INFRA DISTANCE] / [Measures].[INFRA ACCIDENTS]), 
+VISIBLE = 1; 
+CREATE MEMBER CURRENTCUBE.[Measures].[BOTH COUNT]
+ AS ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] ), 
+FORMAT_STRING = "Standard", 
+VISIBLE = 1  ;      
+CREATE MEMBER CURRENTCUBE.[Measures].[INFRA AVG VISIBILITY]
+ AS IIF([Measures].[INFRA ACCIDENTS] = 0, NULL, [Measures].[INFRA VISIBILITY] / [Measures].[INFRA ACCIDENTS]), 
+VISIBLE = 1;      
+CREATE MEMBER CURRENTCUBE.[Measures].[SEV 4 RATIO]
+ AS IIF([Measures].[FACT ACCIDENT Count] = 0, NULL, [Measures].[SEV 4 COUNT] / [Measures].[FACT ACCIDENT Count]), 
+FORMAT_STRING = "Percent", 
+VISIBLE = 1; 
+CREATE MEMBER CURRENTCUBE.[Measures].[JUNCTION ONLY COUNT]
+ AS ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [Measures].[FACT ACCIDENT Count] ) - ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] ), 
+VISIBLE = 1  ; 
+CREATE MEMBER CURRENTCUBE.[Measures].[SIGNAL ONLY COUNT]
+ AS ( [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] ) - ( [DIM ROAD STRUCTURE].[JUNCTION].&amp;[True], [DIM TRAFFIC SIGNAL].[TRAFFIC SIGNAL].&amp;[True], [Measures].[FACT ACCIDENT Count] ), 
+VISIBLE = 1  ;
 
 CREATE MEMBER CURRENTCUBE.[Measures].[Fog_Accident_Rate]
 AS IIF(
@@ -1063,7 +1160,8 @@ AS TopCount(
     ),
     1,
     ([Measures].[FACT ACCIDENT Count], [DIM SEVERITY].[ID SEVERITY].&amp;[4], [ID START DATE].[YEAR].&amp;[2021])
-); </Text>
+);
+ </Text>
         </Command>
       </Commands>
     </MdxScript>

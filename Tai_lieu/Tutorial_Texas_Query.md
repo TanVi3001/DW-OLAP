@@ -119,7 +119,7 @@ Tạo workbook riêng: `Pivot_Excel/Pivot_Texas.xlsx`.
 
 ## 3. Thực hiện bằng MDX Query
 
-Viết MDX Query để lấy các thành phố Texas có > 1,000 vụ tai nạn, kèm AVG Distance. Lưu truy vấn tại `SSAS/MDX_Texas/Texas.mdx`.
+Viết MDX Query để lấy các thành phố Texas có > 1,000 vụ tai nạn, kèm AVG Distance. Lưu truy vấn tại `SSAS/MDX/Query_US_Accident.mdx (QUERY C)`.
 
 ### Bước 1: Mở SSMS và kết nối
 
@@ -192,7 +192,7 @@ WHERE
 ### Bước 5: Lưu Query
 
 1. **Ctrl + S** hoặc **File → Save**
-2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX_Texas\` (tạo thư mục nếu chưa có)
+2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX\` (tạo thư mục nếu chưa có)
 3. Tên file: `Texas.mdx`
 4. Nhấn **Save**
 
@@ -342,7 +342,7 @@ Các thành phố Texas có trên 1,000 vụ tai nạn (sắp xếp giảm dần
 **Files cần tạo:**
 
 - `Pivot_Excel/Pivot_Texas.xlsx`
-- `SSAS/MDX_Texas/Texas.mdx`
+- `SSAS/MDX/Query_US_Accident.mdx (QUERY C)`
 - `Tai_lieu/Bao_cao/Hinh_Texas/` (14 ảnh)
 
 ---

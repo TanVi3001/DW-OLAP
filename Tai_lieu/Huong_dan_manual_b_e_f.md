@@ -263,7 +263,7 @@ Ctrl+S trong Visual Studio lưu project. Thay trường hoặc bộ lọc trong 
 | Không kéo CITY riêng được | Lấy attribute CITY trong DIM LOCATION → More Fields thay vì cấp CITY dưới Location_BEF |
 | Số vụ khác CSV | Nguồn nạp, xử lý ETL, fact trùng, bộ lọc còn sót hoặc dùng ngày kết thúc |
 
-Các file trong [SSAS/MDX_b_e_f/](../SSAS/MDX_b_e_f/) lưu truy vấn trước đó; f1/f2 dùng phiên bản đề f cũ và chưa tương ứng câu Top 5 hiện tại.
+Các file trong [SSAS/MDX/](../SSAS/MDX/) (`*_cap_nhat.mdx`) lưu truy vấn trước đó; f1/f2 dùng phiên bản đề f cũ và chưa tương ứng câu Top 5 hiện tại.
 
 ## 9. Tài liệu Microsoft đã kiểm tra
 

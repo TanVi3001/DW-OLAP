@@ -130,7 +130,7 @@ Nhấn **Ctrl + S** để lưu file.
 
 ## 3. Thực hiện bằng MDX Query
 
-Viết MDX Query để tìm thành phố có nhiều vụ tai nạn Severity 4 nhất trong năm 2021. Lưu truy vấn tại `SSAS/MDX_b/b.mdx`.
+Viết MDX Query để tìm thành phố có nhiều vụ tai nạn Severity 4 nhất trong năm 2021. Lưu truy vấn tại `SSAS/MDX/Query_US_Accident.mdx (QUERY B)`.
 
 ### Bước 1: Mở SSMS và kết nối
 
@@ -209,12 +209,12 @@ Trong trường hợp này, kết quả Browser và Excel đã chứng minh **kh
 ### Bước 5: Lưu Query
 
 1. Nhấn **Ctrl + S** hoặc **File → Save**.
-2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX_b\`.
-3. Tạo thư mục `MDX_b` nếu chưa có.
+2. Chọn thư mục `D:\OLAP\Pro\SSAS\MDX\`.
+3. Tạo thư mục `MDX` nếu chưa có.
 4. Đặt tên file: `b.mdx`.
 5. Nhấn **Save**.
 
-**Chụp và chèn ngay tại đây:** chụp hộp thoại Save với đường dẫn `D:\OLAP\Pro\SSAS\MDX_b\b.mdx`. Chú thích **Hình 3.11.15. Lưu MDX Query vào file b.mdx**.
+**Chụp và chèn ngay tại đây:** chụp hộp thoại Save với đường dẫn `D:\OLAP\Pro\SSAS\MDX\Query_US_Accident.mdx`. Chú thích **Hình 3.11.15. Lưu MDX Query vào file b.mdx**.
 
 **💡 Kết quả MDX:** Pittsburgh, PA = **18 vụ** (cao nhất, đã kiểm tra không có đồng hạng qua Browser và Excel)
 
@@ -429,7 +429,7 @@ A: Theo đúng yêu cầu đề bài "cho biết thành phố có số vụ **nh
 ### Files cần tạo:
 
 - `Pivot_Excel/Pivot_b.xlsx` - Excel workbook với PivotTable
-- `SSAS/MDX_b/b.mdx` - MDX Query file
+- `SSAS/MDX/Query_US_Accident.mdx (QUERY B)` - MDX Query file
 - `Tai_lieu/Bao_cao/Hinh_cau_b/` - Thư mục chứa 15 ảnh
 
 ---
